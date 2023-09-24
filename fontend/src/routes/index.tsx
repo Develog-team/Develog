@@ -1,8 +1,10 @@
 import { useRoutes } from "react-router-dom";
 import * as paths from './const';
-import { MainLayout } from 'layouts';
+import { FullScreenLayout, LoginLayout, MainLayout } from 'layouts';
 import { NotFound } from 'containers';
-import { DashBoardPage } from "pages/dashboard";
+import { InfoPage } from "pages/info";
+import PrivateRoute from "./PrivateRoute";
+import { SignInPage, SignUpPage } from "pages/sign";
 
 export const CommonRoutes = () => {
     const routes = useRoutes([
@@ -10,12 +12,39 @@ export const CommonRoutes = () => {
             path: paths.ROUTE_ROOT,
             children: [
                 {
+                    element: <LoginLayout />,
+                    children: [
+                        // 로그인 페이지
+                        {
+                            path: paths.ROUTE_SIGN_IN,
+                            element: <SignInPage />
+                        },
+                        // 회원가입 페이지
+                        {
+                            path: paths.ROUTE_SIGN_UP,
+                            element: <SignUpPage />
+                        }
+                    ]
+                },
+                {
+                    //네비게이션 없이 FullScreen으로 사용하는 페이지
+                    element: <FullScreenLayout />,
+                    children: [
+                        {
+                            path: paths.ROUTE_INFO,
+                            element: <InfoPage />
+                        }
+                    ]
+                },
+                {
                     element: <MainLayout />,
                     children: [
-                        /** 대시보드 */
                         {
-                            path: paths.ROUTE_MAIN,
-                            element: <DashBoardPage />
+                            // 로그인 필요한 페이지
+                            element: <PrivateRoute />,
+                            children: [
+                                /** 목표 */
+                            ]
                         }
                     ]
                 }
