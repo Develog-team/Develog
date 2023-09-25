@@ -1,0 +1,41 @@
+.main-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    color: black;
+    width: 100%;
+}
+
+.main-footer {
+    position: relative;
+    bottom: 0;
+    background-color: darkgray;
+    width: 100%;
+}
+
+.header-logo {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-profile {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.header-menu {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.menu{
+    min-width: 0px;
+    flex: auto;
+}

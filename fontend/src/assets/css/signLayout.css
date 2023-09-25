@@ -1,0 +1,25 @@
+.full-view {
+    width: 100vw;
+    height: 100vh;
+}
+
+.logo {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+
+.main {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row
+}
+
+.content {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
