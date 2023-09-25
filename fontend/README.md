@@ -18,3 +18,4 @@
 - containers : API 서버와 통신하며 데이터를 다루는 컴포넌트
 - pages : React Route 페이지
 - routes : React Route 파일
+- utils : 비즈니스 로직과 독립적인 기능
