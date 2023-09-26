@@ -3,99 +3,51 @@ import kakaoLogo from 'assets/img/sign/kakao-icon.png';
 import naverLogo from 'assets/img/sign/naver-icon.png';
 import 'assets/css/sign.css';
 import { Divider } from 'antd';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_GOAL, ROUTE_SIGN_UP } from 'routes/const';
-// import axiosInstance from 'utils/api';
+import { useMutation } from 'react-query';
+import { loginFn } from 'modules/sign';
 
 export const SignInContainer = () => {
 
     const navigate = useNavigate();
 
+    const goGoalMain =() =>{
+        navigate(ROUTE_GOAL);
+    }
+
+    const goSignUp =() =>{
+        navigate(ROUTE_SIGN_UP);
+    }
+
+    const { mutate: login } = useMutation(
+        (type: 'google'|'kakao'|'naver') => loginFn(type),
+        {
+            onSuccess: (data:any) => {
+                // sessionStorage.setItem("accessToken", data.value.token.accessToken);
+                console.log(data);
+                goGoalMain();
+            },
+            onError: (error: any) => {
+                console.log(error);
+                goSignUp();
+            }
+        }
+    );
+    
     const loginGoogle = () => {
         //구글 로그인 axios 호출
-
-
-        // const axiosInstance = new AxiosInstanceCreator({
-        //     baseURL: `${process.env.REACT_APP_API_ROOT}`,
-        //     withCredentials: true,
-        // }).create()
-
-        console.log('google');
-
-        // axiosInstance.get(`/oauth2/authorization/google`)
-        //     .then((response: any) => {
-        //         // 메인으로 이동
-        //         console.log(response);
-        //         //navigate(ROUTE_GOAL);
-
-        //     })
-        //     .catch((error: any) => {
-        //         if (error.response?.status === 401) {
-        //             //회원가입으로 이동
-        //             console.log(error);
-
-        //             //navigate(ROUTE_SIGN_UP);
-        //         }
-        //     });
-
-        axios.get('http://localhost:8080/oauth2/authorization/google')
-            .then(response => {
-                // 메인으로 이동
-                console.log(response);
-            })
-            .catch(error => {
-                if (error?.response?.status === 401) {
-                    //회원가입으로 이동
-                    console.log(error);
-                }
-            });
+        login('google');
     }
 
     const loginKakao = () => {
         //카카오 로그인 axios 호출
-
-        const baseUrl = `${process.env.REACT_APP_API_ROOT}`
-
-        axios.get(`${baseUrl}/oauth2/authorization/kakao`)
-            .then((response: any) => {
-                // 메인으로 이동
-                console.log(response);
-
-                navigate(ROUTE_GOAL);
-
-            })
-            .catch((error: any) => {
-                if (error.response?.status === 401) {
-                    //회원가입으로 이동
-                    console.log(error);
-
-                    navigate(ROUTE_SIGN_UP);
-                }
-            });
+        login('kakao');
     }
 
     const loginNaver = () => {
         //네이버 로그인 axios 호출
-
-        const baseUrl = `${process.env.REACT_APP_API_ROOT}`
-
-        axios.get(`${baseUrl}/oauth2/authorization/naver`)
-            .then((response: any) => {
-                // 메인으로 이동
-                console.log(response);
-
-                navigate(ROUTE_GOAL);
-
-            })
-            .catch((error: any) => {
-                if (error.response?.status === 401) {
-                    //회원가입으로 이동
-                    console.log(error);
-
-                    navigate(ROUTE_SIGN_UP);
-                }
-            });
+        login('naver');
     }
 
 
