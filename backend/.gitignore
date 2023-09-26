@@ -261,3 +261,5 @@ gradle-app.setting
 
 #OAuth
 application-oauth.properties
+application-oauth-local.properties
+application-oauth-develop.properties
