@@ -9,3 +9,7 @@ export const ROUTE_SIGN_IN = `${ROUTE_ROOT}/signIn`;
 
 /* 회원가입 */
 export const ROUTE_SIGN_UP = `${ROUTE_ROOT}/signUp`;
+
+
+/* 목표 매인 */
+export const ROUTE_GOAL = `/goal`;
