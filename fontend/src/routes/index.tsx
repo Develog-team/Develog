@@ -1,66 +1,72 @@
-import { useRoutes } from "react-router-dom";
+import { useRoutes } from 'react-router-dom';
 import * as paths from './const';
 import { FullScreenLayout, LoginLayout, MainLayout } from 'layouts';
 import { NotFound } from 'containers';
-import { InfoPage } from "pages/info";
-import PrivateRoute from "./PrivateRoute";
-import { SignInPage, SignUpPage } from "pages/sign";
-import { GoalPage } from "pages/goal";
+import { InfoPage } from 'pages/info';
+import PrivateRoute from './PrivateRoute';
+import { SignInPage, SignUpPage } from 'pages/sign';
+import { GoalPage } from 'pages/goal';
+import { ProfilePage } from 'pages/profile';
 
 export const CommonRoutes = () => {
-    const routes = useRoutes([
+  const routes = useRoutes([
+    {
+      path: paths.ROUTE_ROOT,
+      children: [
         {
-            path: paths.ROUTE_ROOT,
-            children: [
-                {
-                    element: <LoginLayout />,
-                    children: [
-                        // 로그인 페이지
-                        {
-                            path: paths.ROUTE_SIGN_IN,
-                            element: <SignInPage />
-                        },
-                        // 회원가입 페이지
-                        {
-                            path: paths.ROUTE_SIGN_UP,
-                            element: <SignUpPage />
-                        }
-                    ]
-                },
-                {
-                    //네비게이션 없이 FullScreen으로 사용하는 페이지
-                    element: <FullScreenLayout />,
-                    children: [
-                        {
-                            path: paths.ROUTE_INFO,
-                            element: <InfoPage />
-                        }
-                    ]
-                },
-                {
-                    element: <MainLayout />,
-                    children: [
-                        {
-                            // 로그인 필요한 페이지
-                            element: <PrivateRoute />,
-                            children: [
-                                /** 목표 */
-                                {
-                                    path: paths.ROUTE_GOAL,
-                                    element: <GoalPage />
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
+          element: <LoginLayout />,
+          children: [
+            // 로그인 페이지
+            {
+              path: paths.ROUTE_SIGN_IN,
+              element: <SignInPage />,
+            },
+            // 회원가입 페이지
+            {
+              path: paths.ROUTE_SIGN_UP,
+              element: <SignUpPage />,
+            },
+          ],
         },
         {
-            path: "*",
-            element: <NotFound />
-        }
-    ]);
+          //네비게이션 없이 FullScreen으로 사용하는 페이지
+          element: <FullScreenLayout />,
+          children: [
+            {
+              path: paths.ROUTE_INFO,
+              element: <InfoPage />,
+            },
+          ],
+        },
+        {
+          element: <MainLayout />,
+          children: [
+            {
+              // 로그인 필요한 페이지
+              element: <PrivateRoute />,
+              children: [
+                // 목표
+                {
+                  path: paths.ROUTE_GOAL,
+                  element: <GoalPage />,
+                },
+                //프로필 페이지
+                {
+                  path: paths.ROUTE_PROFILE,
+                  element: <ProfilePage />,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      path: '*',
+      element: <NotFound />,
+    },
+  ]);
 
-    // element를 return함으로써 적절한 계층으로 구성된 element가 렌더링 될 수 있도록 함
-    return routes;
+  // element를 return함으로써 적절한 계층으로 구성된 element가 렌더링 될 수 있도록 함
+  return routes;
 };
