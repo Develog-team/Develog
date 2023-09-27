@@ -19,3 +19,4 @@
 - pages : React Route 페이지
 - routes : React Route 파일
 - utils : 비즈니스 로직과 독립적인 기능
+- modules : api 관련 폴더 (각 module 단위로 디렉터리 생성 후 apis, models, recoils 폴더 포함)

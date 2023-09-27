@@ -1,0 +1,14 @@
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation(project(":domain"))
+}
+
+bootJar {
+    archiveFileName = 'application.jar'
+    mainClass.set('com.develog.DevelogMainApplication')
+}

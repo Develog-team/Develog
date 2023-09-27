@@ -5,6 +5,7 @@ import { NotFound } from 'containers';
 import { InfoPage } from "pages/info";
 import PrivateRoute from "./PrivateRoute";
 import { SignInPage, SignUpPage } from "pages/sign";
+import { GoalPage } from "pages/goal";
 
 export const CommonRoutes = () => {
     const routes = useRoutes([
@@ -44,6 +45,10 @@ export const CommonRoutes = () => {
                             element: <PrivateRoute />,
                             children: [
                                 /** 목표 */
+                                {
+                                    path: paths.ROUTE_GOAL,
+                                    element: <GoalPage />
+                                }
                             ]
                         }
                     ]
