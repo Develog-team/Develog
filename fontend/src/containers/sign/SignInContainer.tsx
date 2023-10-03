@@ -1,7 +1,7 @@
 import googleLogo from 'assets/img/sign/google-icon.png';
 import kakaoLogo from 'assets/img/sign/kakao-icon.png';
 import naverLogo from 'assets/img/sign/naver-icon.png';
-import 'assets/css/sign.css';
+import 'assets/css/sign/sign.css';
 import { Divider } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_GOAL, ROUTE_SIGN_UP } from 'routes/const';

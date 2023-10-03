@@ -1,7 +1,7 @@
 import { Avatar, Layout } from "antd"
 import { Content } from "antd/es/layout/layout"
 import { Outlet } from "react-router-dom"
-import 'assets/css/signLayout.css';
+import 'assets/css/sign/signLayout.css';
 
 export const LoginLayout = () => {
     return (

@@ -14,3 +14,6 @@ export const ROUTE_GOAL = `/goal`;
 
 /* 프로필 페이지 */
 export const ROUTE_PROFILE = `/profile`;
+
+/* 피드 메인 */
+export const ROUTE_FEED = `/feed`;

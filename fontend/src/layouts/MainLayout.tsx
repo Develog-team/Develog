@@ -8,12 +8,10 @@ export const MainLayout = () => {
 
     return (
         <Layout
-            style={{
-                width: '100vw',
-                height: '100vh'
-            }}>
+            className="fullLayout">
             <MainHeader />
-            <Content>
+            <Content
+                className="mainContent">
                 <Outlet />
             </Content>
             {/* <MainFooter /> */}

@@ -35,7 +35,16 @@
     align-items: center
 }
 
-.menu{
+.menu {
     min-width: 0px;
     flex: auto;
+}
+
+.mainContent {
+    margin: 2rem 2rem 0 2rem;
+}
+
+.fullLayout {
+    width: 100vw;
+    height: 100vh;
 }
