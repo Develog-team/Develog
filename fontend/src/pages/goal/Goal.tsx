@@ -1,9 +1,16 @@
-const Goal = () =>{
-    return(
-        <>
-        임시 목표 메인
-        </>
-    )
-}
+import { GoalContainer } from 'containers/goal';
+
+const Goal = () => {
+  return (
+    <div
+      style={{
+        width: 1100,
+        margin: '0 auto',
+      }}
+    >
+      <GoalContainer />
+    </div>
+  );
+};
 
 export default Goal;
