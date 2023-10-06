@@ -1,14 +1,4 @@
-import {
-  Button,
-  Divider,
-  Image,
-  Input,
-  Modal,
-  Space,
-  Tabs,
-  Tag,
-  message,
-} from 'antd';
+import { Button, Divider, Image, Modal, Space, Tabs, Tag, message } from 'antd';
 import { useState } from 'react';
 import { ResponsiveCalendar } from '@nivo/calendar';
 import {
@@ -19,7 +9,7 @@ import {
   DroppableProvided,
 } from 'react-beautiful-dnd';
 import { ContainerBox } from 'components';
-import TextArea from 'antd/es/input/TextArea';
+import { StyledInput, StyledTextarea } from 'components/common/StyledInput';
 // ----------------------------------------------------------------------------------
 //탭 타입
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
@@ -280,7 +270,8 @@ const KanbanBoardWrapper = () => {
             onCancel={closeModal}
             confirmLoading={confirmLoading}
           >
-            <Input
+            <StyledInput
+              id='title'
               placeholder='제목'
               value={createGoalTitle}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -288,7 +279,8 @@ const KanbanBoardWrapper = () => {
               }
             />
             <Divider />
-            <TextArea
+            <StyledTextarea
+              id='discription'
               value={createGoalDesc}
               onChange={(e) => setCreateGoalDesc(e.target.value)}
               placeholder='내용 작성'
