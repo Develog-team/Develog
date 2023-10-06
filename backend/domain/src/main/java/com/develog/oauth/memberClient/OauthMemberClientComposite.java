@@ -1,7 +1,7 @@
-package com.develog.domain.oauth.memberClient;
+package com.develog.oauth.memberClient;
 
-import com.develog.domain.oauth.OauthMember;
-import com.develog.domain.oauth.OauthType;
+import com.develog.oauth.OauthMember;
+import com.develog.oauth.OauthType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

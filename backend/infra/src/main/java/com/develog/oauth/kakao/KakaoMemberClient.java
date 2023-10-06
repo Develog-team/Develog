@@ -1,8 +1,8 @@
-package com.develog.infra.oauth.kakao;
+package com.develog.oauth.kakao;
 
-import com.develog.domain.oauth.OauthMember;
-import com.develog.domain.oauth.OauthType;
-import com.develog.domain.oauth.memberClient.OauthMemberClient;
+import com.develog.oauth.OauthMember;
+import com.develog.oauth.OauthType;
+import com.develog.oauth.memberClient.OauthMemberClient;
 import org.springframework.stereotype.Component;
 
 @Component

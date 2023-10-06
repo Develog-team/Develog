@@ -1,4 +1,4 @@
-package com.develog.infra.oauth.kakao;
+package com.develog.oauth.kakao;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

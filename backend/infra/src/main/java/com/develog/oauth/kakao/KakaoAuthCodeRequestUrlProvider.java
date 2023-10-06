@@ -1,7 +1,7 @@
-package com.develog.infra.oauth.kakao;
+package com.develog.oauth.kakao;
 
-import com.develog.domain.oauth.OauthType;
-import com.develog.domain.oauth.oauthCodeRequest.AuthCodeRequestUrlProvider;
+import com.develog.oauth.OauthType;
+import com.develog.oauth.oauthCodeRequest.AuthCodeRequestUrlProvider;
 import org.springframework.stereotype.Component;
 
 @Component

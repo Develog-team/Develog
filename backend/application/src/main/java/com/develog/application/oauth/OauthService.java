@@ -1,10 +1,10 @@
 package com.develog.application.oauth;
 
-import com.develog.domain.oauth.OauthMember;
-import com.develog.domain.oauth.OauthMemberRepository;
-import com.develog.domain.oauth.OauthType;
-import com.develog.domain.oauth.memberClient.OauthMemberClientComposite;
-import com.develog.domain.oauth.oauthCodeRequest.AuthCodeRequestUrlProviderComposite;
+import com.develog.oauth.OauthMember;
+import com.develog.oauth.OauthMemberRepository;
+import com.develog.oauth.OauthType;
+import com.develog.oauth.memberClient.OauthMemberClientComposite;
+import com.develog.oauth.oauthCodeRequest.AuthCodeRequestUrlProviderComposite;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

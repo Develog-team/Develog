@@ -1,6 +1,6 @@
-package com.develog.infra.oauth.config;
+package com.develog.oauth.config;
 
-import com.develog.infra.oauth.kakao.KakaoApiClient;
+import com.develog.oauth.kakao.KakaoApiClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
