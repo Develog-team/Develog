@@ -1,4 +1,4 @@
-package com.develog.oauth;
+package com.develog.domain.oauth;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
