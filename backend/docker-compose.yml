@@ -4,7 +4,7 @@ services:
     restart: always
     ports:
       - "8080:8080"
-    command: java -jar app.jar
+    command: java -Dspring.profiles.active=local -jar app.jar
     depends_on:
       - mysql
     environment:
