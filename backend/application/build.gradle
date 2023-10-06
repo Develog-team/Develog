@@ -1,9 +1,10 @@
 dependencies {
+    compileJava.dependsOn(':infra:build') // infra 모듈을 같이 빌드하기 위함. 개발 완료후에는 삭제
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation(project(":domain"))
-//    runtimeOnly project(':infra')
+    runtimeOnly project(':infra')
 }
 
 bootJar {

@@ -1,11 +1,11 @@
-package com.develog.oauth.kakao;
+package com.develog.oauth.kakao.config;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
-@Getter
-@AllArgsConstructor
+@Data
+@Component
 @ConfigurationProperties(prefix = "oauth.kakao")
 public class KakaoAuthConfig {
 
@@ -15,9 +15,5 @@ public class KakaoAuthConfig {
     private String authorizationGrantType;
     private String clientAuthenticationMethod;
 
-    private String authorizationUri;
-    private String tokenUri;
-    private String userInfoUrl;
-    private String userNameAttribute;
-
+    private String authorizationUri; // code요청 url
 }

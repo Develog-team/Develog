@@ -1,17 +1,17 @@
 package com.develog.oauth.kakao;
 
 import com.develog.oauth.OauthType;
+import com.develog.oauth.kakao.config.KakaoAuthConfig;
+import com.develog.oauth.kakao.config.KakaoProviderConfig;
 import com.develog.oauth.oauthCodeRequest.AuthCodeRequestUrlProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class KakaoAuthCodeRequestUrlProvider implements AuthCodeRequestUrlProvider {
 
-    public KakaoAuthCodeRequestUrlProvider(KakaoAuthConfig config){
-        this.config = config;
-    }
-
-    private final KakaoAuthConfig config;
+    private final KakaoProviderConfig providerConfig;
 
     @Override
     public OauthType support() {
@@ -20,6 +20,6 @@ public class KakaoAuthCodeRequestUrlProvider implements AuthCodeRequestUrlProvid
 
     @Override
     public String getUrl() {
-        return config.getAuthorizationUri();
+        return providerConfig.getAuthorizationUri();
     }
 }
