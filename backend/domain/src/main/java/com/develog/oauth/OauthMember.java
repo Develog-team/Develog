@@ -16,6 +16,13 @@ public class OauthMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, name="oauth_type")
+    @Enumerated(EnumType.STRING)
+    private OauthType oauthType;
+
+    @Column(nullable = false, name = "oauth_id")
+    private Long oauthId;
+
     @Column(nullable = false)
     private String name;
 
