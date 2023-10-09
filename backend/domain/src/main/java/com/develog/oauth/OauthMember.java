@@ -35,5 +35,11 @@ public class OauthMember {
     @Column
     private String introduction;
 
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
+    public void newRefreshToken(String newOne){
+        refreshToken = newOne;
+    }
 
 }

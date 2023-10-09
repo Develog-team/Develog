@@ -1,9 +1,14 @@
 dependencies {
-    compileJava.dependsOn(':infra:build') // infra 모듈을 같이 빌드하기 위함. 개발 완료후에는 삭제
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.1.0'
+    implementation group: 'org.springframework.security', name: 'spring-security-core', version: '6.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation(project(":domain"))
+    compileJava.dependsOn(':infra:build') // infra 모듈을 같이 빌드하기 위함. 개발 완료후에는 삭제
     runtimeOnly project(':infra')
 }
 
