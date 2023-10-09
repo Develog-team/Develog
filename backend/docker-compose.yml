@@ -1,10 +1,10 @@
-\services:
+services:
   api:
     build: .
     restart: always
     ports:
       - "8080:8080"
-    command: java -Dspring.profiles.active=local app.jar
+    command: java -Dspring.profiles.active=local -jar app.jar
     depends_on:
       - mysql
     environment:
@@ -15,9 +15,12 @@
     environment:
       MYSQL_DATABASE: develog
       MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: develoger
+      MYSQL_PASSWORD: develoger123!
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 volumes:
   db_data:
