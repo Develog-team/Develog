@@ -1,0 +1,2 @@
+GRANT ALL PRIVILEGES ON develog.* TO 'develoger'@'%';
+FLUSH PRIVILEGES;
