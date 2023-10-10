@@ -4,6 +4,7 @@ import { ResponsiveCalendar } from '@nivo/calendar';
 import {
   DragDropContext,
   Draggable,
+  DraggableStateSnapshot,
   DropResult,
   Droppable,
   DroppableProvided,
@@ -102,8 +103,9 @@ const KanbanList = ({
         if (list.status === title) {
           return (
             <Draggable draggableId={`${index}`} index={index} key={index}>
-              {(provided) => (
+              {(provided, snapshot) => (
                 <StyledKanbanList
+                  $snapshot={snapshot}
                   ref={provided.innerRef}
                   role='presentation'
                   onClick={() => navigate(`${list.dataId}`)}
@@ -487,17 +489,16 @@ export const GoalContainer = () => {
   return <GoalTab />;
 };
 
-const StyledKanbanList = styled.div`
+const StyledKanbanList = styled.div<{ $snapshot: DraggableStateSnapshot }>`
   width: 100%;
   border: 1px solid #d5d5d5;
   border-radius: 5px;
-  background: '#ffffff';
-  box-shadow: 2px 2px 4px gray;
+  background-color: #ffffff;
+  box-shadow: ${({ $snapshot }) =>
+    $snapshot.isDragging ? 'none' : '2px 2px 4px gray'};
   padding: 10px;
-  transition: box-shadow 0.3s;
+  transition: background-color 0.3s;
   &:hover {
-    box-shadow:
-      0px 0px 4px blue,
-      2px 2px 4px gray;
+    background-color: #eeeeee;
   }
 `;
