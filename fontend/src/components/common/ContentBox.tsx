@@ -39,6 +39,7 @@ export const ContainerBox = ({
 // -----------------------------------------------------------------------------
 //스타일
 const StyledBox = styled.div<StyledBoxProps>`
+  background-color: #ffffff;
   ${({ width, height }) => `width: ${width}; height: ${height};`}
   ${({ $padding }) => $padding === 'true' && `padding: 20px;`}
   ${({ $outline }) => {

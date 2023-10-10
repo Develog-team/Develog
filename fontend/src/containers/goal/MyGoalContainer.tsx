@@ -10,6 +10,8 @@ import {
 } from 'react-beautiful-dnd';
 import { ContainerBox } from 'components';
 import { StyledInput, StyledTextarea } from 'components/common/StyledInput';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 // ----------------------------------------------------------------------------------
 //탭 타입
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
@@ -19,6 +21,7 @@ type KanbanListDataProps = {
   dataId: number;
   title: string;
   description: string;
+  url: string;
   status: string;
 };
 
@@ -75,6 +78,9 @@ const KanbanList = ({
   title: string;
 }) => {
   const filteredData = data.filter((list) => list.status === title);
+
+  const navigate = useNavigate();
+
   return (
     <div
       ref={provided.innerRef}
@@ -95,25 +101,15 @@ const KanbanList = ({
       {data.map((list, index) => {
         if (list.status === title) {
           return (
-            <Draggable
-              draggableId={`testDrag${index}`}
-              index={index}
-              key={index}
-            >
-              {(provided, snapshot) => (
-                <div
+            <Draggable draggableId={`${index}`} index={index} key={index}>
+              {(provided) => (
+                <StyledKanbanList
                   ref={provided.innerRef}
+                  role='presentation'
+                  onClick={() => navigate(`${list.dataId}`)}
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                   style={{
-                    width: '100%',
-                    border: '1px solid #d5d5d5',
-                    borderRadius: 5,
-                    background: '#ffffff',
-                    boxShadow: snapshot.isDragging
-                      ? '0px 0px 4px blue'
-                      : '2px 2px 4px #eeeeee',
-                    padding: 10,
                     ...provided.draggableProps.style,
                   }}
                 >
@@ -139,7 +135,7 @@ const KanbanList = ({
                   >
                     {list.description}
                   </div>
-                </div>
+                </StyledKanbanList>
               )}
             </Draggable>
           );
@@ -157,24 +153,28 @@ const KanbanBoardWrapper = () => {
       dataId: 1,
       title: '1번11111111111111111111111111111111111111111111111',
       description: '내용11111111111111111111111111111111111111111111111111111',
+      url: '/1',
       status: '시작',
     },
     {
       dataId: 2,
       title: '2번',
       description: '내용',
+      url: '/2',
       status: '시작',
     },
     {
       dataId: 3,
       title: '3번',
       description: '내용',
+      url: '/3',
       status: '완료',
     },
     {
       dataId: 4,
       title: '4번',
       description: '내용',
+      url: '/4',
       status: '시작 전',
     },
   ];
@@ -393,10 +393,11 @@ const ProfileWrap = () => {
 };
 //우측 목표
 const GoalMain = () => {
+  const params = useParams();
   return (
     <Space direction='vertical' size='middle' style={{ width: 700 }}>
       <CalendarChartWrapper />
-      <KanbanBoardWrapper />
+      {params.goalId ? <Outlet /> : <KanbanBoardWrapper />}
     </Space>
   );
 };
@@ -485,3 +486,18 @@ const GoalTab = () => {
 export const GoalContainer = () => {
   return <GoalTab />;
 };
+
+const StyledKanbanList = styled.div`
+  width: 100%;
+  border: 1px solid #d5d5d5;
+  border-radius: 5px;
+  background: '#ffffff';
+  box-shadow: 2px 2px 4px gray;
+  padding: 10px;
+  transition: box-shadow 0.3s;
+  &:hover {
+    box-shadow:
+      0px 0px 4px blue,
+      2px 2px 4px gray;
+  }
+`;

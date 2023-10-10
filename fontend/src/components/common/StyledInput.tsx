@@ -74,8 +74,11 @@ const StyledInputWrap = styled.div`
     cursor: text;
     transition: all 0.3s;
   }
-  .antdInput:where(:focus, :valid) + label {
+  .antdInput:where(:focus, :hover) + label {
     color: #9672d9;
+  }
+  .antdInput:where(:focus, :valid) + label {
+    font-weight: bold;
     transform: translateY(-15px) scale(75%);
     background-color: white;
   }

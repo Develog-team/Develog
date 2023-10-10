@@ -5,7 +5,7 @@ import { NotFound } from 'containers';
 import { InfoPage } from 'pages/info';
 import PrivateRoute from './PrivateRoute';
 import { SignInPage, SignUpPage } from 'pages/sign';
-import { GoalPage } from 'pages/goal';
+import { GoalMainPage, GoalPage, GoalsubPage, WriteGoalPage } from 'pages/goal';
 import { ProfilePage } from 'pages/profile';
 
 export const CommonRoutes = () => {
@@ -48,8 +48,27 @@ export const CommonRoutes = () => {
                 // 목표
                 {
                   path: paths.ROUTE_GOAL,
-                  element: <GoalPage />,
+                  element: <GoalMainPage />,
+                  children: [
+                    {
+                      path: paths.ROUTE_GOAL_MY,
+                      element: <GoalPage />,
+                      children: [
+                        // 특정 목표 페이지
+                        {
+                          path: paths.ROUTE_GOAL_LIST,
+                          element: <GoalsubPage />,
+                        },
+                        // 목표 작성 페이지
+                        {
+                          path: paths.ROUTE_GOAL_WRITE,
+                          element: <WriteGoalPage />,
+                        },
+                      ],
+                    },
+                  ],
                 },
+
                 //프로필 페이지
                 {
                   path: paths.ROUTE_PROFILE,
