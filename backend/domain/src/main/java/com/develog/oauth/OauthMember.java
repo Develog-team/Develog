@@ -1,4 +1,4 @@
-package com.develog.member;
+package com.develog.oauth;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Builder
-public class Member {
+public class OauthMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,17 +25,8 @@ public class Member {
     @Column
     private String picture;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+    @Column
+    private String introduction;
 
-    public Member update(String name, String picture) {
-        this.name = name;
-        this.picture  = picture;
-        return this;
-    }
 
-    public String getRoleKey() {
-        return this.role.getKey();
-    }
 }
