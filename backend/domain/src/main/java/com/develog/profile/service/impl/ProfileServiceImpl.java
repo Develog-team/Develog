@@ -8,6 +8,7 @@ import com.develog.profile.exception.ProfileNotFoundException;
 import com.develog.profile.repository.ProfileRepository;
 import com.develog.profile.service.ProfileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +21,11 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository profileRepository;
 
-    //전체 멤버 프로필 조회
+    //전체 멤버 프로필 조회 - 최신 순으로 정렬
     @Override
     public List<ProfileCreateResponseDto> findProfileList() {
 
-        return profileRepository.findAll().stream()
+        return profileRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).stream()
                 .map(ProfileCreateResponseDto::new)
                 .collect(Collectors.toList());
     }
