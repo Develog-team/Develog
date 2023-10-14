@@ -1,0 +1,21 @@
+.sign-btn{
+    cursor: pointer;
+    width: 25rem;
+    display: flex;
+    justify-content: left;
+    border: solid 1px #bebebe;
+    border-radius: 4px;
+    padding: 5px 15px;
+    align-items: center;
+    margin-bottom: 2rem;
+    box-shadow: 1px 1px 5px 3px #4b4b4b1a;
+    height: 3.5rem;
+}
+
+.sign-btn:hover{
+    background-color: #e6e6e6;
+}
+
+.btn-label{
+    margin-left: 4rem;
+}

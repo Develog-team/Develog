@@ -1,18 +1,20 @@
 import { Layout } from "antd"
 import { Content } from "antd/es/layout/layout"
-import { MainFooter, MainHeader } from "components"
+import { MainHeader } from "components"
 import { Outlet } from "react-router-dom"
+import 'assets/css/mainLayout.css';
 
 export const MainLayout = () => {
 
     return (
         <Layout
-            style={{ width: '100vw', height: '100vh' }}>
+            className="fullLayout">
             <MainHeader />
-            <Content>
+            <Content
+                className="mainContent">
                 <Outlet />
             </Content>
-            <MainFooter />
+            {/* <MainFooter /> */}
         </Layout>
     )
 }
