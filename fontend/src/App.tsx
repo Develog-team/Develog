@@ -7,6 +7,7 @@ import { ConfigProvider, Spin } from 'antd';
 import koKR from "antd/lib/locale/ko_KR";
 import 'assets/css/app.css';
 import 'assets/css/common.css';
+import 'assets/css/layout.css';
 
 dayjs.locale('ko');
 

@@ -13,7 +13,7 @@ const Dot = (props: DotProps) => {
 			style={{
 				width: 15,
 				height: 15,
-				border: "1px solid" + (selected ? " white" : " rgba(0, 0, 0, 0)"),
+				border: "1px solid" + (selected ? "#9672d9" : " rgba(0, 0, 0, 0)"),
 				borderRadius: 9999,
 				margin: "10px 0",
 				display: "flex",
@@ -29,7 +29,7 @@ const Dot = (props: DotProps) => {
 					width: 11,
 					height: 11,
 					borderRadius: 9999,
-					backgroundColor: "white",
+					backgroundColor: "#9672d9",
 					cursor: "pointer",
 				}}
 			></div>
@@ -47,15 +47,14 @@ export const Dots= (props:DotsProps) => {
     const { limit, currentIndex, onDotClick } = props;
 
 	return (
-		<div style={{ position: "fixed", top: 0, left: 100, height: "100%" }}>
+		<div style={{ position: "fixed", top: 0, right: 100, height: "100%" }}>
 			<div
 				style={{
 					position: "fixed",
 					top: 65,
-					left: 100 + 8,
+					right: 100 + 8,
 					height: "100%",
-					width: 1,
-					backgroundColor: "white",
+					width: 1
 				}}
 			></div>
 			<div

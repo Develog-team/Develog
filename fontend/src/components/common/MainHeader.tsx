@@ -2,7 +2,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import { Header } from "antd/es/layout/layout"
 import { useNavigate } from "react-router-dom";
-import { ROUTE_FEED, ROUTE_GOAL } from "routes/const";
+import { ROUTE_FEED, ROUTE_GOAL, ROUTE_INFO } from "routes/const";
 
 export const MainHeader = () => {
 
@@ -12,7 +12,10 @@ export const MainHeader = () => {
         <Header
             className="main-header">
             <div
-                className="header-logo">
+                className="header-logo"
+                aria-hidden="true"
+                onClick={()=> navigate(ROUTE_INFO)}
+                >
                 <Avatar size="small" />
                 <span style={{ marginLeft: 10 }}>
                     디벨로그
