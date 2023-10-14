@@ -1,12 +1,12 @@
 import googleLogo from 'assets/img/sign/google-icon.png';
 import kakaoLogo from 'assets/img/sign/kakao-icon.png';
 import naverLogo from 'assets/img/sign/naver-icon.png';
-import 'assets/css/sign/sign.css';
 import { Divider } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_GOAL, ROUTE_SIGN_UP } from 'routes/const';
 import { useMutation } from 'react-query';
 import { loginFn } from 'modules/sign';
+import styled from 'styled-components';
 
 export const SignInContainer = () => {
 
@@ -50,7 +50,6 @@ export const SignInContainer = () => {
         login('naver');
     }
 
-
     return (
         <div>
             <div>
@@ -59,31 +58,49 @@ export const SignInContainer = () => {
             </div>
             <Divider />
             <div>
-                <div
-                    className='sign-btn'
+                <SignButton
                     onClick={() => loginGoogle()}
                     aria-hidden="true"
                 >
                     <img src={googleLogo} alt="google login" width={30} height={30} />
-                    <p className='btn-label'>구글 로그인</p>
-                </div>
-                <div
-                    className='sign-btn'
+                    <SignLabel>구글 로그인</SignLabel>
+                </SignButton>
+                <SignButton
                     onClick={() => loginKakao()}
                     aria-hidden="true"
                 >
                     <img src={kakaoLogo} alt="kakao login" width={30} height={30} />
-                    <p className='btn-label'>카카오 로그인</p>
-                </div>
-                <div
-                    className='sign-btn'
+                    <SignLabel>카카오 로그인</SignLabel>
+                </SignButton>
+                <SignButton
                     onClick={() => loginNaver()}
                     aria-hidden="true"
                 >
                     <img src={naverLogo} alt="naver login" width={30} height={30} />
-                    <p className='btn-label'>네이버 로그인</p>
-                </div>
+                    <SignLabel>네이버 로그인</SignLabel>
+                </SignButton>
             </div>
         </div>
     )
 }
+
+const SignButton = styled.div`
+    cursor: pointer;
+    width: 25rem;
+    display: flex;
+    justify-content: left;
+    border: solid 1px #bebebe;
+    border-radius: 4px;
+    padding: 5px 15px;
+    align-items: center;
+    margin-bottom: 2rem;
+    box-shadow: 1px 1px 5px 3px #4b4b4b1a;
+    height: 3.5rem;
+    &:hover {
+        background-color: #e6e6e6;
+    }
+`
+
+const SignLabel = styled.p`
+    margin-left: 4rem;
+`

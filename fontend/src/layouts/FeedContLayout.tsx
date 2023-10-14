@@ -3,7 +3,7 @@ import 'assets/css/feed/feedMain.css';
 interface FeedMainProps {
     children?: JSX.Element;
 }
-export const FeedMainLayout = (props: FeedMainProps) => {
+export const FeedContLayout = (props: FeedMainProps) => {
     const { children } = props;
 
     return (
