@@ -1,4 +1,5 @@
-import { Tabs } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { FloatButton, Tabs, Tooltip } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import { AllFeedContainer, MyFeedContainer, ScrapFeedContainer, SubFeedContainer } from "containers";
 import { useState } from "react";
@@ -44,6 +45,17 @@ const Feed = () => {
                     <MyFeedContainer />
                 </TabPane>
             </Tabs>
+            <Tooltip
+                placement="topRight"
+                title={'새 글을 공유하세요!'}
+                color="#9672d9"
+            >
+                <FloatButton
+                    shape="circle"
+                    icon={<PlusOutlined />}
+                    type="primary"
+                />
+            </Tooltip>
         </>
     )
 }

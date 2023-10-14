@@ -18,3 +18,8 @@ export interface feedListResponse{
     value: PaginateResult<feedPrev>; 
 }
 
+export interface userPrev extends userPrimary{
+    key:number;
+    intro?:string;
+}
+

@@ -31,8 +31,8 @@
 .header-menu {
     width: 60%;
     display: flex;
-    justify-content: center;
-    align-items: center
+    justify-content: space-around;
+    align-items: center;
 }
 
 .menu {
@@ -45,6 +45,25 @@
 }
 
 .fullLayout {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-item {
+    cursor: pointer;
+    width: 5rem;
+    text-align: center;
+}
+
+.nav-item {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .2s ease-in-out;
+    transition: .2s ease-in-out;
+}
+
+.nav-item:hover{
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    color: #9672d9;
 }
