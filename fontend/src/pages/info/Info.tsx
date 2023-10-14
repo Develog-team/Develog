@@ -1,17 +1,19 @@
+import { Layout } from "antd";
+import { Content } from "antd/es/layout/layout";
+import { InfoHeader } from "components";
 import { InfoContainer } from "containers";
 
 const Info = () => {
+
     return (
         <>
-            <div
-                style={{
-                    margin: '0px auto',
-                    padding: '5rem 2rem 0px',
-                    display: 'flex',
-                    justifyContent: 'center'
-                }}>
+            <Layout
+                className="fullLayout">
+                <InfoHeader />
+                <Content>
                     <InfoContainer />
-            </div>
+                </Content>
+            </Layout>
         </>
     )
 }
