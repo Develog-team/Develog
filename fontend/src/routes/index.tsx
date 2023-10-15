@@ -7,6 +7,7 @@ import PrivateRoute from './PrivateRoute';
 import { SignInPage, SignUpPage } from 'pages/sign';
 import { GoalMainPage, GoalPage, GoalsubPage, WriteGoalPage } from 'pages/goal';
 import { ProfilePage } from 'pages/profile';
+import { FeedPage } from 'pages/feed';
 
 export const CommonRoutes = () => {
   const routes = useRoutes([
@@ -76,6 +77,11 @@ export const CommonRoutes = () => {
                 },
               ],
             },
+            //피드 메인 페이지
+            {
+              path: paths.ROUTE_FEED,
+              element: <FeedPage />
+            }
           ],
         },
       ],

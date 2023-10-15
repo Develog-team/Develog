@@ -1,0 +1,13 @@
+.user-prev-container {
+    display: inline-block;
+    padding: 0.7rem;
+    border: solid 1px #e2e2e2;
+    cursor: pointer;
+    width: 10rem;
+    margin: 0px 0.4rem;
+    border-radius: 20px;
+}
+
+.user-prev-container:hover {
+    background-color: #f0f0f0;
+}

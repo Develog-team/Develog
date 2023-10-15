@@ -6,6 +6,8 @@ import 'dayjs/locale/ko';
 import { ConfigProvider, Spin } from 'antd';
 import koKR from "antd/lib/locale/ko_KR";
 import 'assets/css/app.css';
+import 'assets/css/common.css';
+import 'assets/css/layout.css';
 
 dayjs.locale('ko');
 
@@ -17,7 +19,8 @@ const App = () => {
           colorPrimary: '#9672d9',
           borderRadius: 1,
           fontSize: 15,
-          fontFamily: 'NanumSquareNeo'
+          fontFamily: 'NanumSquareNeo',
+          
         }
       }}
       locale={koKR}
