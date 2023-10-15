@@ -384,7 +384,12 @@ const ProfileWrap = () => {
       </Space>
       <Space wrap>
         {urlList.map((list) => (
-          <Tooltip key={list.urlId} placement='bottom' title={list.url}>
+          <Tooltip
+            key={list.urlId}
+            arrow={false}
+            placement='bottom'
+            title={list.url}
+          >
             <Button
               shape='circle'
               style={{
