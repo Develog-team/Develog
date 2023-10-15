@@ -5,27 +5,46 @@ import { Divider } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_GOAL, ROUTE_SIGN_UP } from 'routes/const';
 import { useMutation } from 'react-query';
-import { loginFn } from 'modules/sign';
 import styled from 'styled-components';
+import { loginFn, loginReFn, signReRequestT, signRequestT } from 'modules/sign';
+import { useState } from 'react';
 
 export const SignInContainer = () => {
 
+    const [platform,setPlatform] = useState<signRequestT|undefined>(undefined);
+    
     const navigate = useNavigate();
 
-    const goGoalMain =() =>{
+    const goGoalMain = () => {
         navigate(ROUTE_GOAL);
     }
 
-    const goSignUp =() =>{
+    const goSignUp = () => {
         navigate(ROUTE_SIGN_UP);
     }
 
     const { mutate: login } = useMutation(
-        (type: 'google'|'kakao'|'naver') => loginFn(type),
+        (type: signRequestT) => loginFn(type),
         {
-            onSuccess: (data:any) => {
+            onSuccess: (res: string) => {
+                console.log(res);
+                if(platform){
+                    loginRedirect({type: platform, code: res});
+                }
+            },
+            onError: (error: any) => {
+                console.log(error);
+                goSignUp();
+            }
+        }
+    );
+
+    const { mutate: loginRedirect } = useMutation(
+        (param: signReRequestT) => loginReFn(param),
+        {
+            onSuccess: (res: any) => {
                 // sessionStorage.setItem("accessToken", data.value.token.accessToken);
-                console.log(data);
+                console.log(res);
                 goGoalMain();
             },
             onError: (error: any) => {
@@ -34,19 +53,22 @@ export const SignInContainer = () => {
             }
         }
     );
-    
+
     const loginGoogle = () => {
         //구글 로그인 axios 호출
+        setPlatform('google');
         login('google');
     }
 
     const loginKakao = () => {
         //카카오 로그인 axios 호출
+        setPlatform('kakao');
         login('kakao');
     }
 
     const loginNaver = () => {
         //네이버 로그인 axios 호출
+        setPlatform('naver');
         login('naver');
     }
 
