@@ -1,4 +1,14 @@
-import { Button, Divider, Image, Modal, Space, Tabs, Tag, message } from 'antd';
+import {
+  Button,
+  Divider,
+  Image,
+  Modal,
+  Space,
+  Tabs,
+  Tag,
+  Tooltip,
+  message,
+} from 'antd';
 import { useState } from 'react';
 import { ResponsiveCalendar } from '@nivo/calendar';
 import {
@@ -88,8 +98,8 @@ const KanbanList = ({
       {...provided.droppableProps}
       style={{
         flexGrow: 1,
-        flexBasis: 205,
-        maxWidth: '205px',
+        flexBasis: 210,
+        maxWidth: '210px',
         display: 'flex',
         flexDirection: 'column',
         gap: 10,
@@ -293,7 +303,7 @@ const KanbanBoardWrapper = () => {
         <div
           style={{
             display: 'flex',
-            gap: 10,
+            justifyContent: 'space-between',
           }}
         >
           {kanbanList.map((kanbanlList) => {
@@ -318,6 +328,26 @@ const KanbanBoardWrapper = () => {
 // ----------------------------------------------------------------------------------
 //좌측 프로필
 const ProfileWrap = () => {
+  // 임시 데이터
+  const urlList = [
+    {
+      urlId: 1,
+      url: 'https://github.com/royud',
+    },
+    {
+      urlId: 2,
+      url: 'https://www.youtube.com/channel/UCt0kVhTCg2ypYXaMxhbrpCQ',
+    },
+    {
+      urlId: 3,
+      url: 'https://velog.io/@ljj9535',
+    },
+    {
+      urlId: 4,
+      url: 'https://www.pillnuts.store/',
+    },
+  ];
+
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', gap: 15, width: 250 }}
@@ -353,41 +383,24 @@ const ProfileWrap = () => {
         <div>2 observing</div>
       </Space>
       <Space wrap>
-        <Tag
-          bordered={false}
-          onClick={() => window.open('https://github.com/royud')}
-          style={{ cursor: 'pointer' }}
-        >
-          github
-        </Tag>
-        <Tag
-          bordered={false}
-          onClick={() => window.open('https://www.naver.com')}
-          style={{ cursor: 'pointer' }}
-        >
-          블로그
-        </Tag>
-        <Tag
-          bordered={false}
-          onClick={() => window.open('https://www.naver.com')}
-          style={{ cursor: 'pointer' }}
-        >
-          블로그
-        </Tag>
-        <Tag
-          bordered={false}
-          onClick={() => window.open('https://www.naver.com')}
-          style={{ cursor: 'pointer' }}
-        >
-          블로그
-        </Tag>
-        <Tag
-          bordered={false}
-          onClick={() => window.open('https://www.naver.com')}
-          style={{ cursor: 'pointer' }}
-        >
-          블로그
-        </Tag>
+        {urlList.map((list) => (
+          <Tooltip key={list.urlId} placement='bottom' title={list.url}>
+            <Button
+              shape='circle'
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              onClick={() => window.open(list.url)}
+            >
+              <img
+                src={`http://www.google.com/s2/favicons?domain=${list.url}`}
+                alt=''
+              />
+            </Button>
+          </Tooltip>
+        ))}
       </Space>
       <div>자기소개</div>
     </div>
