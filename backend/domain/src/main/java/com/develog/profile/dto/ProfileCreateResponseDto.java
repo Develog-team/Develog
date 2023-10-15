@@ -1,6 +1,7 @@
 package com.develog.profile.dto;
 
 import com.develog.profile.entity.Profile;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 
@@ -8,9 +9,12 @@ import lombok.*;
 public class ProfileCreateResponseDto {
 
     private final Long id;
-    private final String nickname; // 닉네임
-    private final String picture; //프로필 이미지
-    private final String bio; // 자기소개
+    @Schema(description = "profile 닉네임")
+    private String nickname; // 닉네임
+    @Schema(description = "profile 이미지")
+    private String picture; //프로필 이미지
+    @Schema(description = "profile 자기소개")
+    private String bio; // 자기소개
 
     public ProfileCreateResponseDto(Profile entity) {
         this.id = entity.getId();
