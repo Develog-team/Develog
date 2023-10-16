@@ -1,7 +1,7 @@
-package com.develog.api.oauth;
+package com.develog.api.auth.oauth;
 
-import com.develog.application.oauth.AuthResponse;
-import com.develog.application.oauth.OauthService;
+import com.develog.application.auth.oauth.AuthResponse;
+import com.develog.application.auth.oauth.OauthService;
 import com.develog.oauth.OauthType;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class OauthController {
     private final OauthService oauthService;
 
     @GetMapping("/{oauthType}")
-    public ResponseEntity<Void> toOauthCodeRequestPage(@PathVariable OauthType oauthType, HttpServletResponse response) throws IOException {
+    public ResponseEntity<Void> redirectToOauthCodeRequestPage(@PathVariable OauthType oauthType, HttpServletResponse response) throws IOException {
         String pageUrl = oauthService.getOauthCodeRequestPageUrl(oauthType);
         response.sendRedirect(pageUrl);
         return ResponseEntity.ok().build();
