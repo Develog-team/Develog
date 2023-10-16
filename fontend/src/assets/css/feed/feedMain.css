@@ -1,0 +1,59 @@
+.feed-main {
+    background-color: white;
+    border: 1px solid #f0f0f0;
+    border-radius: 1px 0 0 1px;
+    padding: 10px 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+    height: calc(100vh - 6.1rem);
+}
+
+.feed-main::-webkit-scrollbar {
+    width: 10px;  /* 스크롤바의 너비 */
+}
+
+.feed-main::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #9672d9; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.feed-main::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+.user-container{
+    position: absolute; 
+    bottom: 0;
+    width: calc(100% - 3rem); 
+    height: 14.3rem; 
+}
+
+.user-header{
+    font-weight: 600;
+    text-align: left;
+    font-size: large;
+    margin-left: 1.5rem;
+}
+
+.user-list{
+    padding: 1rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.user-list::-webkit-scrollbar {
+   height: 10px;  /* 스크롤바의 너비 */
+}
+
+.user-list::-webkit-scrollbar-thumb {
+    width: 10%; /* 스크롤바의 길이 */
+    background: #9672d9; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.user-list::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
