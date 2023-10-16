@@ -1,4 +1,4 @@
-package com.develog.api.oauth;
+package com.develog.api.auth.oauth;
 
 import com.develog.oauth.OauthType;
 import lombok.NoArgsConstructor;

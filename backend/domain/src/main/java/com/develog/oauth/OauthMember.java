@@ -16,6 +16,13 @@ public class OauthMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, name="oauth_type")
+    @Enumerated(EnumType.STRING)
+    private OauthType oauthType;
+
+    @Column(nullable = false, name = "oauth_id")
+    private Long oauthId;
+
     @Column(nullable = false)
     private String name;
 
@@ -28,5 +35,11 @@ public class OauthMember {
     @Column
     private String introduction;
 
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
+    public void newRefreshToken(String newOne){
+        refreshToken = newOne;
+    }
 
 }
