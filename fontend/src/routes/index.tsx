@@ -5,7 +5,13 @@ import { NotFound } from 'containers';
 import { InfoPage } from 'pages/info';
 import PrivateRoute from './PrivateRoute';
 import { SignInPage, SignUpPage } from 'pages/sign';
-import { GoalMainPage, GoalPage, GoalsubPage, WriteGoalPage } from 'pages/goal';
+import {
+  ExecutionGoalPage,
+  GoalMainPage,
+  GoalPage,
+  GoalsubPage,
+  WriteGoalPage,
+} from 'pages/goal';
 import { ProfilePage } from 'pages/profile';
 import { FeedPage } from 'pages/feed';
 
@@ -59,6 +65,13 @@ export const CommonRoutes = () => {
                         {
                           path: paths.ROUTE_GOAL_LIST,
                           element: <GoalsubPage />,
+                          children: [
+                            //목표 실행 페이지
+                            {
+                              path: paths.ROUTE_EXECUTION_GOAL_LIST,
+                              element: <ExecutionGoalPage />,
+                            },
+                          ],
                         },
                         // 목표 작성 페이지
                         {
@@ -80,8 +93,8 @@ export const CommonRoutes = () => {
             //피드 메인 페이지
             {
               path: paths.ROUTE_FEED,
-              element: <FeedPage />
-            }
+              element: <FeedPage />,
+            },
           ],
         },
       ],

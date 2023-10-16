@@ -1,9 +1,8 @@
-import { LeftOutlined } from '@ant-design/icons';
 import { Button, Divider, Dropdown, MenuProps, Space, Tag } from 'antd';
 import { ContainerBox } from 'components';
-import { useNavigate } from 'react-router-dom';
+import { BeforePageBtn } from 'components/common/BeforePageBtn';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-// import { useParams } from 'react-router-dom';
 
 //타입
 type RecordDataProps = {
@@ -37,12 +36,19 @@ const data = {
 };
 
 const RecordList = ({ data }: { data: RecordDataProps }) => {
+  const navigate = useNavigate();
   return (
     <StyledRecordList>
       <Divider orientation='left' orientationMargin='0' plain>
         {data.date}
       </Divider>
-      <div className='box'>
+      <div
+        className='box'
+        role='presentation'
+        onClick={() => {
+          navigate(`${data.recordId}`);
+        }}
+      >
         <h4>{data.recordTitle}</h4>
         <div className={'description'}>{data.recordDesc}</div>
       </div>
@@ -68,9 +74,7 @@ const RecordBox = () => {
 };
 
 export const GoalsubContainer = () => {
-  // const params = useParams();
-  const navigate = useNavigate();
-
+  const params = useParams();
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -87,31 +91,28 @@ export const GoalsubContainer = () => {
   ];
 
   return (
-    <ContainerBox $outline='shadow'>
-      <Button
-        shape='circle'
-        icon={<LeftOutlined />}
-        onClick={() => navigate(-1)}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      />
-      <h1>{data.title}</h1>
-      <div>{data.description}</div>
-      <SettingWrap>
-        <Dropdown menu={{ items }} placement='bottom'>
-          <Tag style={{ cursor: 'pointer' }}>{data.status}</Tag>
-        </Dropdown>
-        <Space>
-          <Button>수정</Button>
-          <Button danger>삭제</Button>
-        </Space>
-      </SettingWrap>
-      <Divider dashed />
-      <RecordBox />
-    </ContainerBox>
+    <>
+      {!params.executionId ? (
+        <ContainerBox $outline='shadow'>
+          <BeforePageBtn />
+          <h1>{data.title}</h1>
+          <div>{data.description}</div>
+          <SettingWrap>
+            <Dropdown menu={{ items }} placement='bottom'>
+              <Tag style={{ cursor: 'pointer' }}>{data.status}</Tag>
+            </Dropdown>
+            <Space>
+              <Button>수정</Button>
+              <Button danger>삭제</Button>
+            </Space>
+          </SettingWrap>
+          <Divider dashed />
+          <RecordBox />
+        </ContainerBox>
+      ) : (
+        <Outlet />
+      )}
+    </>
   );
 };
 

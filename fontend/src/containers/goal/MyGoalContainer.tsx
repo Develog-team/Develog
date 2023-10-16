@@ -468,7 +468,6 @@ const MyGoal = () => {
   return (
     <div
       style={{
-        marginTop: 56,
         display: 'flex',
         justifyContent: 'space-between',
       }}
@@ -529,18 +528,16 @@ const GoalTab = () => {
   };
 
   return (
-    <div style={{ margin: '56px 0' }}>
-      <Tabs
-        defaultActiveKey='1' //기본 탭
-        centered // 중앙 정렬
-        type='editable-card' // 수정이 가능한 카드 타입
-        hideAdd // 추가 버튼 숨기기
-        onChange={changeTab}
-        activeKey={activeKey}
-        onEdit={removeTab}
-        items={items}
-      />
-    </div>
+    <Tabs
+      defaultActiveKey='1' //기본 탭
+      centered // 중앙 정렬
+      type='editable-card' // 수정이 가능한 카드 타입
+      hideAdd // 추가 버튼 숨기기
+      onChange={changeTab}
+      activeKey={activeKey}
+      onEdit={removeTab}
+      items={items}
+    />
   );
 };
 
