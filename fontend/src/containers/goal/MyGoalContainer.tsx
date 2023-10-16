@@ -42,31 +42,72 @@ const kanbanList = ['시작 전', '시작', '완료'];
 // ----------------------------------------------------------------------------------
 // 캘린더 차트
 const CalendarChartWrapper = () => {
+  //임시 데이터
   const data = [
     {
-      value: 348,
-      day: '2023-08-24',
+      date: '2023-08-22',
+      goals: ['1번', '2번'],
+    },
+    {
+      date: '2023-08-23',
+      goals: ['2번', '4번', '3번'],
+    },
+    {
+      date: '2023-10-22',
+      goals: ['1번', '2번'],
     },
   ];
+  //차트에 들어갈 데이터
+  const Calendardata: { day: string; value: number }[] = [];
+  for (let i = 0; i < data.length; i++) {
+    const newData = {
+      day: data[i].date,
+      value: data[i].goals.length,
+    };
+    Calendardata.push(newData);
+  }
+
+  //툴팁
+  const tooltipWrap = (item: any) => {
+    const targetItem = data.find((list) => list.date === item.day);
+    const splitteddate = item.day.split('-');
+    const month = splitteddate[1].replace(/^[0]/, '');
+    const day = splitteddate[2];
+    return (
+      <div
+        style={{
+          width: '200px',
+          padding: `10px`,
+          background: '#ffffff',
+          borderRadius: `5px`,
+          boxShadow: '2px 2px 4px gray',
+        }}
+      >
+        <div>{`${month}월 ${day}일`}</div>
+        <ul>{targetItem?.goals.map((list) => <li key={list}>{list}</li>)}</ul>
+      </div>
+    );
+  };
   return (
     <ContainerBox height='200px' $outline='shadow'>
       <ResponsiveCalendar
-        data={data}
+        data={Calendardata}
         from='2023-01-01'
         to='2023-12-31'
         emptyColor='#eeeeee'
         colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
-        margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         yearSpacing={40}
         monthBorderColor='#ffffff'
         dayBorderWidth={2}
         dayBorderColor='#ffffff'
+        tooltip={tooltipWrap}
         legends={[
           {
             anchor: 'bottom-right',
             direction: 'row',
             translateY: 36,
-            itemCount: 4,
+            itemCount: 1,
             itemWidth: 42,
             itemHeight: 36,
             itemsSpacing: 14,
@@ -401,7 +442,7 @@ const ProfileWrap = () => {
             >
               <img
                 src={`http://www.google.com/s2/favicons?domain=${list.url}`}
-                alt=''
+                alt={`${list.url} 아이콘`}
               />
             </Button>
           </Tooltip>
