@@ -256,3 +256,4 @@ gradle-app.setting
 
 #oauth
 application-oauth.properties
+application-security.properties
