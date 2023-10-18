@@ -1,4 +1,4 @@
-package com.jpaConfigure;
+package com.develog.jpaConfigure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

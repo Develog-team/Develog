@@ -1,6 +1,6 @@
 package com.develog.application.auth.jwt;
 
-import com.develog.oauth.OauthMemberRepository;
+import com.develog.domain.oauth.OauthMemberRepository;
 import com.develog.security.jwt.JwtAuthenticationException;
 import com.develog.security.jwt.JwtManager;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,6 +1,6 @@
 package com.develog.oauth.kakao.response;
 
-import com.develog.oauth.OauthMember;
+import com.develog.domain.oauth.OauthMember;
 import lombok.Data;
 
 @Data

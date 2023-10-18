@@ -1,7 +1,7 @@
 package com.develog.api.goal;
 
-import com.develog.goal.Goal;
-import com.develog.goal.GoalStatus;
+import com.develog.domain.goal.Goal;
+import com.develog.domain.goal.GoalStatus;
 import lombok.Builder;
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.develog.oauth;
+package com.develog.domain.oauth;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

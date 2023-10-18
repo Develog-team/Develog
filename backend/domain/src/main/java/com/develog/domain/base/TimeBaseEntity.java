@@ -1,4 +1,4 @@
-package com.develog.base;
+package com.develog.domain.base;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

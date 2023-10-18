@@ -1,6 +1,6 @@
-package com.develog.goal;
+package com.develog.domain.goal;
 
-import com.develog.base.UserBaseEntity;
+import com.develog.domain.base.UserBaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

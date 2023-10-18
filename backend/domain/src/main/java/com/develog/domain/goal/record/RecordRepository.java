@@ -1,4 +1,4 @@
-package com.develog.goal.record;
+package com.develog.domain.goal.record;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

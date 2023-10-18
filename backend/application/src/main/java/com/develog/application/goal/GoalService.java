@@ -2,10 +2,9 @@ package com.develog.application.goal;
 
 import com.develog.api.goal.GoalDTO;
 import com.develog.application.common.ContextUtils;
-import com.develog.goal.Goal;
-import com.develog.goal.GoalRepository;
+import com.develog.domain.goal.Goal;
+import com.develog.domain.goal.GoalRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,9 +1,9 @@
 package com.develog.application.goal;
 
 import com.develog.api.goal.GoalDTO;
-import com.develog.goal.Goal;
-import com.develog.goal.GoalRepository;
-import com.develog.goal.GoalStatus;
+import com.develog.domain.goal.Goal;
+import com.develog.domain.goal.GoalRepository;
+import com.develog.domain.goal.GoalStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +62,7 @@ public class GoalServiceIntegrationTest {
     private GoalDTO getTestDto(){
         return GoalDTO.builder()
                 .title("test 목표")
-                .description("테스트용입니다.")
+                .description("테스트 목표 설명.")
                 .status(GoalStatus.TODO)
                 .build();
     }

@@ -1,7 +1,7 @@
-package com.develog.goal.record;
+package com.develog.domain.goal.record;
 
-import com.develog.base.TimeBaseEntity;
-import com.develog.goal.Goal;
+import com.develog.domain.base.TimeBaseEntity;
+import com.develog.domain.goal.Goal;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

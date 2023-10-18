@@ -1,9 +1,8 @@
-package com.develog.base;
+package com.develog.domain.base;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.LastModifiedBy;
 
 @MappedSuperclass
 @Getter

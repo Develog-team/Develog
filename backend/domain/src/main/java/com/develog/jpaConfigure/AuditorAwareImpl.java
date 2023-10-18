@@ -1,4 +1,4 @@
-package com.jpaConfigure;
+package com.develog.jpaConfigure;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
