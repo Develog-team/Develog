@@ -1,24 +1,12 @@
 import axiosInstance from "utils/api";
-import { signReRequestT } from "../models";
+import { signReRequestT  } from "../models";
 
-//처음 로그인 request
-export const loginFn = async (params: string) => {
-    console.log('login');
-    
-    const res = await axiosInstance.get(`/oauth/${params}` );
-
-    switch(res.status) {
-        case 200:
-            return res.data.value;
-        default:
-            return res.data.value;
-    }
-};
-
-//로그인 request 후 redirect
+//로그인 redirect 후 로그인 정보 request
 export const loginReFn = async (params: signReRequestT) => {
 
-    const res = await axiosInstance.get(`/oauth/redirect/${params}` );
+    const typeData = params.type.toUpperCase();
+
+    const res = await axiosInstance.post(`/oauth/login?type=${typeData}&code=${params.code}` );
 
     switch(res.status) {
         case 200:

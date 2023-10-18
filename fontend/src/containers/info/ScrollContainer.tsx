@@ -63,7 +63,7 @@ export const ScrollContainer = (props: ScrollContainerProps) => {
         e.preventDefault();
         if (!canScroll.current) return;
         const { deltaY } = e; // +is down -is up
-        console.log("scroll to", outerDivRef.current?.scrollHeight);
+        // console.log("scroll to", outerDivRef.current?.scrollHeight);
         if (deltaY > 0 && outerDivRef.current) {
             scrollDown();
         } else if (deltaY < 0 && outerDivRef.current) {

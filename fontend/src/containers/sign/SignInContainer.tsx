@@ -2,74 +2,30 @@ import googleLogo from 'assets/img/sign/google-icon.png';
 import kakaoLogo from 'assets/img/sign/kakao-icon.png';
 import naverLogo from 'assets/img/sign/naver-icon.png';
 import { Divider } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { ROUTE_GOAL, ROUTE_SIGN_UP } from 'routes/const';
-import { useMutation } from 'react-query';
 import styled from 'styled-components';
-import { loginFn, loginReFn, signReRequestT, signRequestT } from 'modules/sign';
-import { useState } from 'react';
+import { signRequestT } from 'modules/sign';
 
 export const SignInContainer = () => {
 
-    const [platform,setPlatform] = useState<signRequestT|undefined>(undefined);
-    
-    const navigate = useNavigate();
-
-    const goGoalMain = () => {
-        navigate(ROUTE_GOAL);
+    const LoginReq =( type: signRequestT ) => {
+        const link = document.createElement('a');
+        link.href = `http://localhost:8080/oauth/${type}`;
+        document.body.appendChild(link);
+        link.click();
     }
-
-    const goSignUp = () => {
-        navigate(ROUTE_SIGN_UP);
-    }
-
-    const { mutate: login } = useMutation(
-        (type: signRequestT) => loginFn(type),
-        {
-            onSuccess: (res: string) => {
-                console.log(res);
-                if(platform){
-                    loginRedirect({type: platform, code: res});
-                }
-            },
-            onError: (error: any) => {
-                console.log(error);
-                goSignUp();
-            }
-        }
-    );
-
-    const { mutate: loginRedirect } = useMutation(
-        (param: signReRequestT) => loginReFn(param),
-        {
-            onSuccess: (res: any) => {
-                // sessionStorage.setItem("accessToken", data.value.token.accessToken);
-                console.log(res);
-                goGoalMain();
-            },
-            onError: (error: any) => {
-                console.log(error);
-                goSignUp();
-            }
-        }
-    );
 
     const loginGoogle = () => {
         //구글 로그인 axios 호출
-        setPlatform('google');
-        login('google');
+        LoginReq('google');
     }
-
     const loginKakao = () => {
         //카카오 로그인 axios 호출
-        setPlatform('kakao');
-        login('kakao');
+        LoginReq('kakao');
     }
 
     const loginNaver = () => {
         //네이버 로그인 axios 호출
-        setPlatform('naver');
-        login('naver');
+        LoginReq('naver');
     }
 
     return (
@@ -87,9 +43,10 @@ export const SignInContainer = () => {
                     <img src={googleLogo} alt="google login" width={30} height={30} />
                     <SignLabel>구글 로그인</SignLabel>
                 </SignButton>
+
                 <SignButton
-                    onClick={() => loginKakao()}
                     aria-hidden="true"
+                    onClick={() => loginKakao()}
                 >
                     <img src={kakaoLogo} alt="kakao login" width={30} height={30} />
                     <SignLabel>카카오 로그인</SignLabel>
@@ -102,7 +59,7 @@ export const SignInContainer = () => {
                     <SignLabel>네이버 로그인</SignLabel>
                 </SignButton>
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -4,7 +4,7 @@ import { FullScreenLayout, LoginLayout, MainLayout } from 'layouts';
 import { NotFound } from 'containers';
 import { InfoPage } from 'pages/info';
 import PrivateRoute from './PrivateRoute';
-import { SignInPage, SignUpPage } from 'pages/sign';
+import { OAuthPage, SignInPage, SignUpPage } from 'pages/sign';
 import { GoalPage } from 'pages/goal';
 import { ProfilePage } from 'pages/profile';
 import { FeedPage } from 'pages/feed';
@@ -27,6 +27,10 @@ export const CommonRoutes = () => {
               path: paths.ROUTE_SIGN_UP,
               element: <SignUpPage />,
             },
+            {
+              path: paths.ROUTE_SIGN_HANDLER,
+              element: <OAuthPage />
+            }
           ],
         },
         {
@@ -70,7 +74,7 @@ export const CommonRoutes = () => {
     {
       path: '*',
       element: <NotFound />,
-    },
+    }
   ]);
 
   // element를 return함으로써 적절한 계층으로 구성된 element가 렌더링 될 수 있도록 함
