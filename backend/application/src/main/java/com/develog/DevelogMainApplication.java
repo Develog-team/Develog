@@ -1,8 +1,6 @@
 package com.develog;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static org.springframework.boot.SpringApplication.*;
 

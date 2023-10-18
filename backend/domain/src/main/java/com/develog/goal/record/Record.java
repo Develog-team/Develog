@@ -20,6 +20,6 @@ public class Record extends TimeBaseEntity {
     @JoinColumn(name = "goal_id")
     private Goal goal;
     private String record; // 기록
-    private String retrospective; // 회고
+    private String retrospect; // 회고
 
 }

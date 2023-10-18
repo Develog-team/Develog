@@ -1,8 +1,9 @@
 package com.develog.goal;
 
-import com.develog.base.TimeBaseEntity;
+import com.develog.base.UserBaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Goal extends TimeBaseEntity {
+@Builder
+public class Goal extends UserBaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "goal_id")
@@ -19,5 +21,5 @@ public class Goal extends TimeBaseEntity {
     private String description;
 
     @Enumerated(value = EnumType.STRING)
-    private Status status;
+    private GoalStatus status;
 }

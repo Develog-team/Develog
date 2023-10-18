@@ -1,4 +1,4 @@
-package com.develog.response;
+package com.develog.api.common.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;

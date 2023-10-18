@@ -1,5 +1,5 @@
 package com.develog.goal;
 
-public enum Status {
+public enum GoalStatus {
     TODO, ONGOING, DONE
 }

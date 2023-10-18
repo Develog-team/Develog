@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtManager jwtManager;
-    private static final String[] excludePath ={"/oauth/**", "/auth/jwt/refresh"};
+    private static final String[] excludePath ={"/oauth/**", "/auth/jwt/refresh", "/h2-console/**"};
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
