@@ -1,16 +1,5 @@
-import {
-  Button,
-  Divider,
-  Image,
-  Modal,
-  Space,
-  Tabs,
-  Tag,
-  Tooltip,
-  message,
-} from 'antd';
+import { Button, Divider, Modal, Space, Tabs, Tag, message } from 'antd';
 import { useState } from 'react';
-import { ResponsiveCalendar } from '@nivo/calendar';
 import {
   DragDropContext,
   Draggable,
@@ -19,10 +8,10 @@ import {
   Droppable,
   DroppableProvided,
 } from 'react-beautiful-dnd';
-import { ContainerBox } from 'components';
-import { StyledInput, StyledTextarea } from 'components/common/StyledInput';
+import { StyledInput, StyledTextarea } from 'components';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { DefaultGoalPageBox } from 'components/goal';
 // ----------------------------------------------------------------------------------
 //탭 타입
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
@@ -40,85 +29,6 @@ type KanbanListDataProps = {
 const kanbanList = ['시작 전', '시작', '완료'];
 
 // ----------------------------------------------------------------------------------
-// 캘린더 차트
-const CalendarChartWrapper = () => {
-  //임시 데이터
-  const data = [
-    {
-      date: '2023-08-22',
-      goals: ['1번', '2번'],
-    },
-    {
-      date: '2023-08-23',
-      goals: ['2번', '4번', '3번'],
-    },
-    {
-      date: '2023-10-22',
-      goals: ['1번', '2번'],
-    },
-  ];
-  //차트에 들어갈 데이터
-  const Calendardata: { day: string; value: number }[] = [];
-  for (let i = 0; i < data.length; i++) {
-    const newData = {
-      day: data[i].date,
-      value: data[i].goals.length,
-    };
-    Calendardata.push(newData);
-  }
-
-  //툴팁
-  const tooltipWrap = (item: any) => {
-    const targetItem = data.find((list) => list.date === item.day);
-    const splitteddate = item.day.split('-');
-    const month = splitteddate[1].replace(/^[0]/, '');
-    const day = splitteddate[2];
-    return (
-      <div
-        style={{
-          width: '200px',
-          padding: `10px`,
-          background: '#ffffff',
-          borderRadius: `5px`,
-          boxShadow: '2px 2px 4px gray',
-        }}
-      >
-        <div>{`${month}월 ${day}일`}</div>
-        <ul>{targetItem?.goals.map((list) => <li key={list}>{list}</li>)}</ul>
-      </div>
-    );
-  };
-  return (
-    <ContainerBox height='200px' $outline='shadow'>
-      <ResponsiveCalendar
-        data={Calendardata}
-        from='2023-01-01'
-        to='2023-12-31'
-        emptyColor='#eeeeee'
-        colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
-        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-        yearSpacing={40}
-        monthBorderColor='#ffffff'
-        dayBorderWidth={2}
-        dayBorderColor='#ffffff'
-        tooltip={tooltipWrap}
-        legends={[
-          {
-            anchor: 'bottom-right',
-            direction: 'row',
-            translateY: 36,
-            itemCount: 1,
-            itemWidth: 42,
-            itemHeight: 36,
-            itemsSpacing: 14,
-            itemDirection: 'right-to-left',
-          },
-        ]}
-      />
-    </ContainerBox>
-  );
-};
-
 // 칸반 리스트
 const KanbanList = ({
   provided,
@@ -138,12 +48,10 @@ const KanbanList = ({
       ref={provided.innerRef}
       {...provided.droppableProps}
       style={{
-        flexGrow: 1,
-        flexBasis: 210,
-        maxWidth: '210px',
+        width: '32%',
         display: 'flex',
         flexDirection: 'column',
-        gap: 10,
+        gap: '10px',
       }}
     >
       <Space>
@@ -198,6 +106,94 @@ const KanbanList = ({
     </div>
   );
 };
+
+const CreateGoalModal = ({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
+  const [createGoalTitle, setCreateGoalTitle] = useState<string>('');
+  const [createGoalDesc, setCreateGoalDesc] = useState<string>('');
+  const [messageApi, contextHolder] = message.useMessage();
+  //임시 구현용
+  const isSuccessGoal = true;
+
+  //목표 생성
+  const createGoal = () => {
+    //클릭 시 로딩
+    setConfirmLoading(true);
+    // api 호출
+
+    //결과
+    if (!isSuccessGoal) {
+      //실패 => 임시로 구현
+      setTimeout(() => {
+        //메세지
+        messageApi.open({
+          type: 'error',
+          content: '생성에 실패하였습니다. 다시 시도하여 주세요',
+        });
+        //로딩 끝
+        setConfirmLoading(false);
+      }, 2000);
+    } else {
+      // 성공 => 임시로 로딩 구현
+      setTimeout(() => {
+        //메세지
+        messageApi.open({
+          type: 'success',
+          content: '생성에 성공하였습니다',
+        });
+        //로딩 끝, 모달 종료
+        setConfirmLoading(false);
+        closeModal();
+      }, 2000);
+    }
+  };
+
+  //모달 접기
+  const closeModal = () => {
+    //작성한 내용 초기화
+    setCreateGoalTitle('');
+    setCreateGoalDesc('');
+    //모달 접기
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      {contextHolder}
+      <Modal
+        title='목표 생성'
+        open={isOpen}
+        onOk={createGoal}
+        onCancel={closeModal}
+        confirmLoading={confirmLoading}
+      >
+        <StyledInput
+          id='title'
+          placeholder='제목'
+          value={createGoalTitle}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setCreateGoalTitle(e.target.value)
+          }
+        />
+        <Divider />
+        <StyledTextarea
+          id='discription'
+          value={createGoalDesc}
+          onChange={(e) => setCreateGoalDesc(e.target.value)}
+          placeholder='내용 작성'
+          autoSize={{ minRows: 3, maxRows: 5 }}
+        />
+      </Modal>
+    </>
+  );
+};
+
 //칸반 전체
 const KanbanBoardWrapper = () => {
   //임시 데이터
@@ -231,58 +227,11 @@ const KanbanBoardWrapper = () => {
       status: '시작 전',
     },
   ];
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [createGoalTitle, setCreateGoalTitle] = useState('');
-  const [createGoalDesc, setCreateGoalDesc] = useState('');
-  const [messageApi, contextHolder] = message.useMessage();
-  //임시 구현용
-  const isSuccessGoal = true;
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   //모달 오픈
   const showModal = () => {
     setIsModalOpen(true);
-  };
-  //목표 생성
-  const createGoal = () => {
-    //클릭 시 로딩
-    setConfirmLoading(true);
-    // api 호출
-
-    //결과
-    if (!isSuccessGoal) {
-      //실패 => 임시로 구현
-      setTimeout(() => {
-        //메세지
-        messageApi.open({
-          type: 'error',
-          content: '생성에 실패하였습니다. 다시 시도하여 주세요',
-        });
-        //로딩 끝
-        setConfirmLoading(false);
-      }, 2000);
-    } else {
-      // 성공 => 임시로 로딩 구현
-      setTimeout(() => {
-        //메세지
-        messageApi.open({
-          type: 'success',
-          content: '생성에 성공하였습니다',
-        });
-        //로딩 끝, 모달 종료
-        setConfirmLoading(false);
-        closeModal();
-      }, 2000);
-    }
-  };
-  //모달 접기
-  const closeModal = () => {
-    //작성한 내용 초기화
-    setCreateGoalTitle('');
-    setCreateGoalDesc('');
-    //모달 접기
-    setIsModalOpen(false);
   };
 
   // 드래그 시 이벤트
@@ -304,7 +253,12 @@ const KanbanBoardWrapper = () => {
   };
 
   return (
-    <ContainerBox $outline='shadow'>
+    <div style={{ minHeight: 350 }}>
+      <Space>
+        <h2>목표 칸반보드</h2>
+        <Button onClick={showModal}>목표 작성</Button>
+        <CreateGoalModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+      </Space>
       <DragDropContext onDragEnd={onDragEnd}>
         <div
           style={{
@@ -312,35 +266,7 @@ const KanbanBoardWrapper = () => {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}
-        >
-          <h2>목표 칸반보드</h2>
-          {contextHolder}
-          <Button onClick={showModal}>목표 작성</Button>
-          <Modal
-            title='목표 생성'
-            open={isModalOpen}
-            onOk={createGoal}
-            onCancel={closeModal}
-            confirmLoading={confirmLoading}
-          >
-            <StyledInput
-              id='title'
-              placeholder='제목'
-              value={createGoalTitle}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setCreateGoalTitle(e.target.value)
-              }
-            />
-            <Divider />
-            <StyledTextarea
-              id='discription'
-              value={createGoalDesc}
-              onChange={(e) => setCreateGoalDesc(e.target.value)}
-              placeholder='내용 작성'
-              autoSize={{ minRows: 3, maxRows: 5 }}
-            />
-          </Modal>
-        </div>
+        ></div>
         <div
           style={{
             display: 'flex',
@@ -362,119 +288,47 @@ const KanbanBoardWrapper = () => {
           })}
         </div>
       </DragDropContext>
-    </ContainerBox>
-  );
-};
-
-// ----------------------------------------------------------------------------------
-//좌측 프로필
-const ProfileWrap = () => {
-  // 임시 데이터
-  const urlList = [
-    {
-      urlId: 1,
-      url: 'https://github.com/royud',
-    },
-    {
-      urlId: 2,
-      url: 'https://www.youtube.com/channel/UCt0kVhTCg2ypYXaMxhbrpCQ',
-    },
-    {
-      urlId: 3,
-      url: 'https://velog.io/@ljj9535',
-    },
-    {
-      urlId: 4,
-      url: 'https://www.pillnuts.store/',
-    },
-  ];
-
-  return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', gap: 15, width: 250 }}
-    >
-      <Space
-        className='mainProfileWrap'
-        size='middle'
-        direction='vertical'
-        align='center'
-      >
-        <ContainerBox
-          width='250px'
-          $outline='shadow'
-          $padding='false'
-          anotherStyle={{
-            aspectRatio: '1/1',
-            borderRadius: '50%',
-            background: 'gray',
-            overflow: 'hidden',
-          }}
-        >
-          <Image
-            width='100%'
-            height='100%'
-            src='error'
-            fallback='data:image/png;base64,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'
-          />
-        </ContainerBox>
-        <div className='profileNickname'>닉네임</div>
-      </Space>
-      <Space split={'•'}>
-        <div>2 observer</div>
-        <div>2 observing</div>
-      </Space>
-      <Space wrap>
-        {urlList.map((list) => (
-          <Tooltip
-            key={list.urlId}
-            arrow={false}
-            placement='bottom'
-            title={list.url}
-          >
-            <Button
-              shape='circle'
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onClick={() => window.open(list.url)}
-            >
-              <img
-                src={`http://www.google.com/s2/favicons?domain=${list.url}`}
-                alt={`${list.url} 아이콘`}
-              />
-            </Button>
-          </Tooltip>
-        ))}
-      </Space>
-      <div>자기소개</div>
     </div>
   );
 };
-//우측 목표
-const GoalMain = () => {
-  const params = useParams();
-  return (
-    <Space direction='vertical' size='middle' style={{ width: 700 }}>
-      <CalendarChartWrapper />
-      {params.goalId ? <Outlet /> : <KanbanBoardWrapper />}
-    </Space>
-  );
-};
+
 // ----------------------------------------------------------------------------------
 //목표 창
 const MyGoal = () => {
+  const params = useParams();
+  //임시 데이터
+  const CalendarData = [
+    {
+      date: '2023-01-01',
+      goals: ['1번'],
+    },
+    {
+      date: '2023-08-22',
+      goals: ['1번', '2번'],
+    },
+    {
+      date: '2023-08-23',
+      goals: ['2번', '4번', '3번'],
+    },
+    {
+      date: '2023-10-22',
+      goals: ['1번', '2번'],
+    },
+    {
+      date: '2023-12-31',
+      goals: ['1번', '2번'],
+    },
+  ];
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}
-    >
-      <ProfileWrap />
-      <GoalMain />
-    </div>
+    <>
+      {!params.goalId ? (
+        <DefaultGoalPageBox data={CalendarData}>
+          <KanbanBoardWrapper />
+        </DefaultGoalPageBox>
+      ) : (
+        <Outlet />
+      )}
+    </>
   );
 };
 

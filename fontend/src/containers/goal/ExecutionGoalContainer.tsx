@@ -1,6 +1,5 @@
 import { Button, Drawer, Space } from 'antd';
-import { ContainerBox } from 'components';
-import { BeforePageBtn } from 'components/common/BeforePageBtn';
+import { DefaultGoalPageBox } from 'components/goal';
 import { useState } from 'react';
 
 const data = {
@@ -20,7 +19,11 @@ const Main = () => {
     setRetrospectOpen(false);
   };
   return (
-    <>
+    <div
+      style={{
+        minHeight: 620,
+      }}
+    >
       <div
         style={{
           margin: '20px 0',
@@ -56,14 +59,36 @@ const Main = () => {
       >
         <p>내용</p>
       </Drawer>
-    </>
+    </div>
   );
 };
 export const ExecutionGoalContainer = () => {
+  //임시 데이터
+  const CalendarData = [
+    {
+      date: '2023-01-01',
+      goals: ['1번'],
+    },
+    {
+      date: '2023-08-22',
+      goals: ['1번', '2번'],
+    },
+    {
+      date: '2023-08-23',
+      goals: ['2번', '4번', '3번'],
+    },
+    {
+      date: '2023-10-22',
+      goals: ['1번', '2번'],
+    },
+    {
+      date: '2023-12-31',
+      goals: ['1번', '2번'],
+    },
+  ];
   return (
-    <ContainerBox $outline='shadow'>
-      <BeforePageBtn />
+    <DefaultGoalPageBox data={CalendarData}>
       <Main />
-    </ContainerBox>
+    </DefaultGoalPageBox>
   );
 };
