@@ -26,7 +26,7 @@ public class OauthService {
     @Transactional
     public AuthResponse login(OauthType type, String code) {
         OauthMember member = oauthMemberClientComposite.findOauthMember(type, code);
-        OauthMember saved = oauthMemberRepository.findById(member.getId()).orElse(oauthMemberRepository.save(member));
+        OauthMember saved = oauthMemberRepository.findByOauthIdAndOauthType(member.getOauthId(), member.getOauthType()).orElse(oauthMemberRepository.save(member));
         String token = jwtManager.createToken(member.getId(), false);
         String refreshToken = jwtManager.createToken(member.getId(), true);
         member.newRefreshToken(refreshToken);
