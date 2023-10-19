@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { ProfileBox } from './ProfileBox';
 import { CalendarChartBox } from './CalendarChartBox';
-import { BeforePageBtn, ContainerBox } from 'components/common';
-import { useParams } from 'react-router-dom';
+import { ContainerBox } from 'components/common';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
-import { theme } from 'antd';
+import { Breadcrumb, theme } from 'antd';
 
 type DefaultGoalPageProps = {
   children: React.ReactNode;
@@ -19,6 +19,26 @@ export const DefaultGoalPageBox = ({
   data,
 }: DefaultGoalPageProps) => {
   const params = useParams();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const pathnameArr = pathname.split('/').splice(2);
+  const breadCrumbArr = [];
+  for (let i = 0; i < pathnameArr.length; i++) {
+    const LastIdx = pathnameArr.length - 1;
+    const navigateIdx = -(LastIdx - i);
+    const newItems = {
+      title: (
+        <StyledBreadCrumb
+          $navigateidx={navigateIdx}
+          role='presentation'
+          onClick={() => navigateIdx && navigate(navigateIdx)}
+        >
+          {pathnameArr[i]}
+        </StyledBreadCrumb>
+      ),
+    };
+    breadCrumbArr.push(newItems);
+  }
 
   const { token } = theme.useToken();
 
@@ -42,7 +62,11 @@ export const DefaultGoalPageBox = ({
         <ContainerBox $outline='shadow'>
           <div>
             {/* 게시글 id가 있을 경우만 이전 버튼 생성 */}
-            {params.goalId && <BeforePageBtn />}
+            {params.goalId && (
+              <div style={{ margin: '10px 0' }}>
+                <Breadcrumb items={breadCrumbArr} />
+              </div>
+            )}
             {children}
           </div>
         </ContainerBox>
@@ -71,4 +95,7 @@ const ContentWrap = styled.div<{ $scrollcolor: string }>`
   display: flex;
   flex-direction: column;
   gap: 10px;
+`;
+const StyledBreadCrumb = styled.div<{ $navigateidx: number }>`
+  cursor: ${({ $navigateidx }) => $navigateidx && 'pointer'};
 `;
