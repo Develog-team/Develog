@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
-import { InfoHeader } from "components";
+import { MainHeader } from "components";
 import { InfoContainer } from "containers";
 
 const Info = () => {
@@ -9,7 +9,7 @@ const Info = () => {
         <>
             <Layout
                 className="fullLayout">
-                <InfoHeader />
+                <MainHeader />
                 <Content>
                     <InfoContainer />
                 </Content>

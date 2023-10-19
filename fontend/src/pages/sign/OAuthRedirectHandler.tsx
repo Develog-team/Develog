@@ -26,6 +26,8 @@ const OAuthRedirectHandler =() =>{
             onSuccess: (res: any) => {
                 sessionStorage.setItem("refreshToken", res.refreshToken);
                 sessionStorage.setItem("accessToken", res.token);
+                sessionStorage.setItem("name", res.name);
+                sessionStorage.setItem("picture", res.picture);
                 navigate(ROUTE_GOAL);
             },
             onError: (error: any) => {

@@ -23,14 +23,6 @@
     cursor: pointer;
 }
 
-.header-profile {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
 .header-menu {
     width: 60%;
     display: flex;
