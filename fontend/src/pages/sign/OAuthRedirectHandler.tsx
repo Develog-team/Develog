@@ -15,8 +15,6 @@ const OAuthRedirectHandler =() =>{
     useEffect(()=>{
         if(code&&type){
             loginRedirect({type, code})
-            console.log('code', code);
-            console.log('type',type);
         }else{
             message.error('error');
         }
@@ -26,13 +24,12 @@ const OAuthRedirectHandler =() =>{
         (param: signReRequestT) => loginReFn(param),
         {
             onSuccess: (res: any) => {
-                // sessionStorage.setItem("accessToken", data.value.token.accessToken);
-                console.log(res);
+                sessionStorage.setItem("refreshToken", res.refreshToken);
+                sessionStorage.setItem("accessToken", res.token);
                 navigate(ROUTE_GOAL);
             },
             onError: (error: any) => {
-                console.log(error);
-                
+                message.error(error);
             }
         }
     );

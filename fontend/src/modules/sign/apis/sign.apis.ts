@@ -10,9 +10,9 @@ export const loginReFn = async (params: signReRequestT) => {
 
     switch(res.status) {
         case 200:
-            return res.data.value;
+            return res.data;
         default:
-            return res.data.value;
+            return res.data;
     }
 };
 
