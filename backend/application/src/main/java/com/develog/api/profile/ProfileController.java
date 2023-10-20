@@ -1,9 +1,7 @@
 package com.develog.api.profile;
 
-import com.develog.profile.dto.PhotoResponseDto;
-import com.develog.profile.dto.ProfileCreateRequestDto;
-import com.develog.profile.dto.ProfileListResponseDto;
-import com.develog.profile.dto.ProfileUpdateRequestDto;
+import com.develog.profile.dto.*;
+import com.develog.profile.entity.Photo;
 import com.develog.profile.entity.Profile;
 import com.develog.profile.service.PhotoService;
 import com.develog.profile.service.impl.ProfileServiceImpl;
@@ -16,6 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -79,14 +78,71 @@ public class ProfileController {
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Response editBoard(@ApiParam(value = "profile id", required = true) @PathVariable Long id,
-                              @RequestBody ProfileUpdateRequestDto profileUpdateRequestDto) {
-        return Response.success(profileService.update(id, profileUpdateRequestDto));
+                              @ModelAttribute ProfileVO profileVO) throws Exception {
+
+        ProfileUpdateRequestDto requestDto =
+                ProfileUpdateRequestDto.builder()
+                        .nickname(profileVO.getNickname())
+                        .bio(profileVO.getBio())
+                        .link(profileVO.getLink())
+                        .build();
+
+        // DB에 저장되어있는 파일 불러오기
+        List<PhotoResponseDto> dbPhotoList = fileService.findAllByProfile(id);
+        // 전달되어온 파일들
+        List<MultipartFile> multipartList = profileVO.getFiles();
+        // 새롭게 전달되어온 파일들의 목록을 저장할 List 선언
+        List<MultipartFile> addFileList = new ArrayList<>();
+
+        if(CollectionUtils.isEmpty(dbPhotoList)) { // DB에 아예 존재 x
+            if(!CollectionUtils.isEmpty(multipartList)) { // 전달되어온 파일이 하나라도 존재
+                for (MultipartFile multipartFile : multipartList)
+                    addFileList.add(multipartFile);	// 저장할 파일 목록에 추가
+            }
+        }
+        else {  // DB에 한 장 이상 존재
+            if(CollectionUtils.isEmpty(multipartList)) { // 전달되어온 파일 아예 x
+                // 파일 삭제
+                for(PhotoResponseDto dbPhoto : dbPhotoList)
+                    fileService.deletePhoto(dbPhoto.getFileId());
+            }
+            else {  // 전달되어온 파일 한 장 이상 존재
+
+                // DB에 저장되어있는 파일 원본명 목록
+                List<String> dbOriginNameList = new ArrayList<>();
+
+                // DB의 파일 원본명 추출
+                for(PhotoResponseDto dbPhoto : dbPhotoList) {
+                    // file id로 DB에 저장된 파일 정보 얻어오기
+                    PhotoDto dbPhotoDto = fileService.findByFileId(dbPhoto.getFileId());
+                    // DB의 파일 원본명 얻어오기
+                    String dbOrigFileName = dbPhotoDto.getOrigFileName();
+
+                    if(!multipartList.contains(dbOrigFileName))  // 서버에 저장된 파일들 중 전달되어온 파일이 존재하지 않는다면
+                        fileService.deletePhoto(dbPhoto.getFileId());  // 파일 삭제
+                    else  // 그것도 아니라면
+                        dbOriginNameList.add(dbOrigFileName);	// DB에 저장할 파일 목록에 추가
+                }
+
+                for (MultipartFile multipartFile : multipartList) { // 전달되어온 파일 하나씩 검사
+                    // 파일의 원본명 얻어오기
+                    String multipartOrigName = multipartFile.getOriginalFilename();
+                    if(!dbOriginNameList.contains(multipartOrigName)){   // DB에 없는 파일이면
+                        addFileList.add(multipartFile); // DB에 저장할 파일 목록에 추가
+                    }
+                }
+            }
+        }
+
+        // 각각 인자로 게시글의 id, 수정할 정보, DB에 저장할 파일 목록을 넘겨주기
+        return Response.success(profileService.update(id, requestDto, addFileList));
     }
 
     @Operation(summary = "profile 삭제", description = "profile을 삭제합니다.")
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Response deleteBoard(@PathVariable Long id) {
+        fileService.deletePhoto(id);
         profileService.delete(id);
         return Response.success();
     }

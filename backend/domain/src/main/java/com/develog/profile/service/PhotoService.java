@@ -8,4 +8,6 @@ import java.util.List;
 public interface PhotoService {
     PhotoDto findByFileId(Long id);
     List<PhotoResponseDto> findAllByProfile(Long id);
+
+    void deletePhoto(Long id);
 }

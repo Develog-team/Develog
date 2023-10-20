@@ -2,6 +2,7 @@ package com.develog.profile.service.impl;
 
 import com.develog.profile.dto.PhotoDto;
 import com.develog.profile.entity.Photo;
+import com.develog.profile.entity.Profile;
 import com.develog.profile.service.PhotoService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -90,6 +91,10 @@ public class FileHandler {
                         photoDto.getFilePath(),
                         photoDto.getFileSize()
                 );
+
+
+                // 생성 후 리스트에 추가
+                fileList.add(photo);
 
                 // 생성 후 리스트에 추가
                 fileList.add(photo);

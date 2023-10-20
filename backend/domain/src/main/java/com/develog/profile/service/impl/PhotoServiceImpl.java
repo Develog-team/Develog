@@ -3,6 +3,7 @@ package com.develog.profile.service.impl;
 import com.develog.profile.dto.PhotoDto;
 import com.develog.profile.dto.PhotoResponseDto;
 import com.develog.profile.entity.Photo;
+import com.develog.profile.exception.PhotoNotFoundException;
 import com.develog.profile.repository.PhotoRepository;
 import com.develog.profile.service.PhotoService;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,15 @@ public class PhotoServiceImpl implements PhotoService {
         return photoList.stream()
                 .map(PhotoResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public void deletePhoto(Long id) {
+        Photo photo = photoRepository.findById(id).orElseThrow(PhotoNotFoundException::new);
+
+        // 게시글이 있는 경우 삭제처리
+        photoRepository.delete(photo);
     }
 
 }

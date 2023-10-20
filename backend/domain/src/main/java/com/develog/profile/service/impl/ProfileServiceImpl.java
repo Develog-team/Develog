@@ -70,12 +70,20 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Transactional
     @Override
-    public Long update(long id, ProfileUpdateRequestDto profileUpdateRequestDto) {
+    public Long update(Long id, ProfileUpdateRequestDto requestDto, List<MultipartFile> files) throws Exception {
         Profile profile = profileRepository.findById(id).orElseThrow(ProfileNotFoundException::new);
 
-        profile.update(profileUpdateRequestDto.getNickname(),
-                profileUpdateRequestDto.getBio(),
-                profileUpdateRequestDto.getLink());
+        List<Photo> photoList = fileHandler.parseFileInfo(files);
+
+        if(!photoList.isEmpty()){
+            for(Photo photo : photoList) {
+                photoRepository.save(photo);
+            }
+        }
+
+        profile.update(requestDto.getNickname(),
+                requestDto.getBio(),
+                requestDto.getLink());
 
         return id;
     }

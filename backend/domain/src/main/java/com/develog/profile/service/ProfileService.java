@@ -13,6 +13,6 @@ public interface ProfileService {
     List<Profile> findProfileList(); //전체 프로필 조회
     ProfileCreateResponseDto findProfile(Long id, List<Long> fileId); //개별 프로필 조회
     Long create(ProfileCreateRequestDto requestDto, List<MultipartFile> files) throws Exception;
-    Long update(long id, ProfileUpdateRequestDto profileUpdateRequestDto);
+    Long update(Long id, ProfileUpdateRequestDto requestDto, List<MultipartFile> files) throws Exception;
     void delete(long id);
 }
