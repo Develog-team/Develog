@@ -3,6 +3,7 @@ package com.develog.profile.dto;
 import com.develog.profile.entity.Profile;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,12 +20,12 @@ public class ProfileCreateRequestDto {
     private List<String> link;
 
 
+
     @Builder
     public ProfileCreateRequestDto(String nickname, String bio, List<String> link) {
         this.nickname = nickname;
         this.bio = bio;
         this.link = link;
-
     }
 
 

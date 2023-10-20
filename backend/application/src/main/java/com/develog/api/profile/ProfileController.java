@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Api(value = "Profile Controller", tags = "Profile")
 @RequiredArgsConstructor
@@ -26,8 +29,9 @@ public class ProfileController {
     @Operation(summary = "profile 생성", description = "profile을 작성합니다.")
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public Response create(@RequestBody ProfileCreateRequestDto profileCreateRequestDto) {
-        return Response.success(profileService.create(profileCreateRequestDto));
+    public Response create(@ModelAttribute List<MultipartFile> files,
+                           @ModelAttribute ProfileCreateRequestDto requestDto) throws Exception{
+        return Response.success(profileService.create(requestDto, files));
     }
 
     @Operation(summary = "profile 전체 목록 조회", description = "profile 전체 목록을 조회합니다.")
