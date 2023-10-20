@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface ProfileService {
 
-    List<ProfileCreateResponseDto> findProfileList(); //전체 프로필 조회
-    ProfileCreateResponseDto findProfile(long id); //개별 프로필 조회
+    List<Profile> findProfileList(); //전체 프로필 조회
+    ProfileCreateResponseDto findProfile(Long id, List<Long> fileId); //개별 프로필 조회
     Long create(ProfileCreateRequestDto requestDto, List<MultipartFile> files) throws Exception;
     Long update(long id, ProfileUpdateRequestDto profileUpdateRequestDto);
     void delete(long id);

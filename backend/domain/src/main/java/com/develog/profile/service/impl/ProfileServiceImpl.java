@@ -28,18 +28,20 @@ public class ProfileServiceImpl implements ProfileService {
 
     //전체 멤버 프로필 조회 - 최신 순으로 정렬
     @Override
-    public List<ProfileCreateResponseDto> findProfileList() {
+    public List<Profile> findProfileList() {
 
-        return profileRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).stream()
-                .map(ProfileCreateResponseDto::new)
-                .collect(Collectors.toList());
+//        return profileRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).stream()
+//                .map(ProfileCreateResponseDto::new)
+//                .collect(Collectors.toList());
+
+        return profileRepository.findAll();
     }
 
     //개별 멤버 프로필 조회
     @Override
-    public ProfileCreateResponseDto findProfile(long id) {
+    public ProfileCreateResponseDto findProfile(Long id, List<Long> fileId) {
         Profile entity = profileRepository.findById(id).orElseThrow(ProfileNotFoundException::new);
-        return new ProfileCreateResponseDto(entity);
+        return new ProfileCreateResponseDto(entity, fileId);
     }
 
     @Transactional
