@@ -40,8 +40,7 @@ const StyledCont = styled.div`
 
 const StyledCont2 = styled.div`
     margin-top: 3rem;
-    position: absolute;
-    right: 25%;
+    margin-left: 70%;
 `
 
 const StartButton = styled.div`
