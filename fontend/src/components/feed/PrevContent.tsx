@@ -1,7 +1,7 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import { feedPrev } from "modules/feed";
-import 'assets/css/feed/feedPrev.css';
+import styled from "styled-components";
 
 interface PrevContentProps {
     data: feedPrev;
@@ -11,10 +11,10 @@ export const PrevContent = (props: PrevContentProps) => {
     const { data } = props;
 
     return (
-        <div
-            className="feed-prev-container">
-            <div
-                className="avatar">
+        <StyledFeedListCont
+            onClick={() => console.log('click')}
+        > 
+            <StyledAvatar>
                 {
                     data?.user?.profPath ? (
                         <Avatar size={60} src={data?.user?.profPath} />
@@ -22,25 +22,53 @@ export const PrevContent = (props: PrevContentProps) => {
                         <Avatar size={60} icon={<UserOutlined />} />
                     )
                 }
-            </div>
+            </StyledAvatar>
             <div>
                 <div>
-                    <p className="nick">
+                    <StyledNick>
                         {data?.user.nickname}
-                    </p>
-                    <p className="date" >
+                    </StyledNick>
+                    <StyledDate>
                         {data?.regDt}
-                    </p>
+                    </StyledDate>
                 </div>
-                <div className="cont">
+                <StyledContData>
                     <span>
                         {data.contents.content}
                     </span>
                     <span>
                         {data.contents.url}
                     </span>
-                </div>
+                </StyledContData>
             </div>
-        </div>
+        </StyledFeedListCont>
     )
 }
+
+const StyledFeedListCont = styled.div`
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+`
+
+const StyledNick = styled.p`
+    font-size: 1rem;
+    margin: 0px 0px 3px 0px;
+    font-weight: 600;
+`
+
+const StyledDate = styled.p`
+    font-size: 0.75rem;
+    margin: 0px;
+    color: gray;
+`
+
+const StyledAvatar = styled.div`
+    margin-right: 15px;
+`
+
+const StyledContData = styled.div`
+    margin-top: 10px;
+`

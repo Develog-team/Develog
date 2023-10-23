@@ -1,15 +1,23 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { FloatButton, Tabs, Tooltip } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
+import { FeedAddModal } from "components";
 import { AllFeedContainer, MyFeedContainer, ScrapFeedContainer, SubFeedContainer } from "containers";
 import { useState } from "react";
 
 const Feed = () => {
-
+    // const modalRef = useRef<HTMLDivElement>(null);
+    //tab 이동 key
     const [activeKey, setActiveKey] = useState<string>();
+    //modal 띄우기 여부
+    const [addFeedShow, setAddFeedShow] = useState<boolean>(false);
 
     const changeTab = (key: string) => {
         setActiveKey(key);
+    }
+
+    const handleShareClick = () => {
+        setAddFeedShow(true);
     }
 
     return (
@@ -54,8 +62,17 @@ const Feed = () => {
                     shape="circle"
                     icon={<PlusOutlined />}
                     type="primary"
+                    onClick={() => handleShareClick()}
                 />
             </Tooltip>
+            {
+                addFeedShow && (
+                    <FeedAddModal
+                        open={addFeedShow}
+                        closeModal={()=>setAddFeedShow(false)}
+                    />
+                )
+            }
         </>
     )
 }
