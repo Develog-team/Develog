@@ -19,20 +19,26 @@ import java.util.List;
 public class Goal extends UserBaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "goal_id")
+    @Column(name = "goal_id", nullable = false)
     private Long id;
+    @Column(nullable = false)
     private String title;
     private String description;
 
     @Enumerated(value = EnumType.STRING)
-    private GoalStatus status;
+    @Column(nullable = false)
+    private GoalStatus status = GoalStatus.TODO;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "goal_id")
+    @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Record> records = new ArrayList<>();
 
     public void addRecord(Record record){
         records.add(record);
+        record.belongTo(this);
     }
 
+    public void update(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 }

@@ -1,14 +1,17 @@
-package com.develog.api.goal;
+package com.develog.application.goal.dto;
 
 import com.develog.domain.goal.Goal;
 import com.develog.domain.goal.GoalStatus;
+import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class GoalDTO {
+public class GoalCreateDTO {
 
+    @NotBlank(message = "title can not be empty")
     private String title;
     private String description;
     private GoalStatus status;
@@ -18,14 +21,6 @@ public class GoalDTO {
                 .title(title)
                 .description(description)
                 .status(status)
-                .build();
-    }
-
-    public static GoalDTO from(Goal goal){
-        return GoalDTO.builder()
-                .title(goal.getTitle())
-                .description(goal.getDescription())
-                .status(goal.getStatus())
                 .build();
     }
 }

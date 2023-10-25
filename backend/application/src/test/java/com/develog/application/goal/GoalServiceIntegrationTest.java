@@ -1,9 +1,11 @@
 package com.develog.application.goal;
 
-import com.develog.api.goal.GoalDTO;
+import com.develog.application.goal.dto.GoalCreateDTO;
+import com.develog.application.goal.dto.GoalDetailDto;
 import com.develog.domain.goal.Goal;
 import com.develog.domain.goal.GoalRepository;
 import com.develog.domain.goal.GoalStatus;
+import com.develog.domain.goal.record.Record;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +46,8 @@ public class GoalServiceIntegrationTest {
 
     @Test
     public void testCreateGoal() {
-        GoalDTO goalDTO = getTestDto();
 
-        Long goalId = goalService.create(goalDTO);
+        Long goalId = goalService.create(getTestGoal());
 
         Optional<Goal> goalInDb = goalRepository.findById(goalId);
         assertThat(goalInDb).isPresent();
@@ -54,13 +55,26 @@ public class GoalServiceIntegrationTest {
 
     @Test
     public void testFindByUser() {
-        goalService.create(getTestDto());
-        List<GoalDTO> goals = goalService.findByUser();
+        goalService.create(getTestGoal());
+        List<GoalDetailDto> goals = goalService.findByUser();
         assertThat(goals).isNotEmpty();
     }
 
-    private GoalDTO getTestDto(){
-        return GoalDTO.builder()
+    @Test
+    public void testCreateRecord() {
+        Long goalId = goalService.create(getTestGoal());
+        Long recordId = goalService.createRecord(goalId, getTestRecord());
+    }
+
+    private Record getTestRecord(){
+        return Record.builder()
+            .record("기록")
+            .retrospect("회고")
+            .build();
+    }
+
+    private Goal getTestGoal(){
+        return Goal.builder()
                 .title("test 목표")
                 .description("테스트 목표 설명.")
                 .status(GoalStatus.TODO)

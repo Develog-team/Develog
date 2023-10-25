@@ -1,6 +1,5 @@
 package com.develog.security.jwt;
 
-import com.develog.domain.oauth.OauthMemberRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
@@ -68,17 +67,17 @@ public class JwtManager {
 
     public Authentication getAuthentication(String token) {
         Long memberId = getMemberId(token);
-        UserDetails userDetails =  new org.springframework.security.core.userdetails.User(String.valueOf(memberId), null, new ArrayList<>());
+        UserDetails userDetails =  new org.springframework.security.core.userdetails.User(String.valueOf(memberId), "", new ArrayList<>());
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     public Long getMemberId(String token) {
-        return Long.parseLong((String)Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().get(TOKEN_MEMBER_ID));
+        return ((Integer)Jwts.parserBuilder().setSigningKey(getSecretKey()).build().parseClaimsJws(token).getBody().get(TOKEN_MEMBER_ID)).longValue();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+            Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(getSecretKey()).build().parseClaimsJws(token);
             if (claims.getBody().getExpiration().before(new Date())) {
                 return false;
             }
