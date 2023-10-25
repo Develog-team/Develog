@@ -1,9 +1,13 @@
 package com.develog.oauth.kakao.response;
 
-import com.develog.oauth.OauthMember;
+import com.develog.domain.oauth.OauthMember;
+import com.develog.domain.oauth.OauthType;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
 @Data
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class KakaoMemberResponse {
 
     private Long id;
@@ -12,16 +16,21 @@ public class KakaoMemberResponse {
     public OauthMember toEntity(){
         return OauthMember.builder()
                 .oauthId(id)
-                .name(kakaoAccount.profile.nickName)
+                .oauthType(OauthType.KAKAO)
+                .name(kakaoAccount.profile.nickname)
                 .picture(kakaoAccount.profile.profileImageUrl)
                 .build();
     }
 
-    private class KakaoAccount{
+    @Data
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+    public class KakaoAccount{
         Profile profile;
 
-        private class Profile{
-            String nickName;
+        @Data
+        @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+        public class Profile{
+            String nickname;
             String profileImageUrl;
         }
     }

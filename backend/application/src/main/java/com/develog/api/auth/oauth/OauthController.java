@@ -2,7 +2,7 @@ package com.develog.api.auth.oauth;
 
 import com.develog.application.auth.oauth.AuthResponse;
 import com.develog.application.auth.oauth.OauthService;
-import com.develog.oauth.OauthType;
+import com.develog.domain.oauth.OauthType;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
