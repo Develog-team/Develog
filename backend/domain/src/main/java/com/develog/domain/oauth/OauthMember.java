@@ -1,4 +1,4 @@
-package com.develog.oauth;
+package com.develog.domain.oauth;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Builder
+@Table(name = "oauth_member")
 public class OauthMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

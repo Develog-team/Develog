@@ -1,17 +1,15 @@
 package com.develog.oauth.kakao;
 
-import com.develog.oauth.OauthMember;
-import com.develog.oauth.OauthType;
+import com.develog.domain.oauth.OauthMember;
+import com.develog.domain.oauth.OauthType;
 import com.develog.oauth.kakao.config.KakaoAuthConfig;
 import com.develog.oauth.kakao.response.KakaoMemberResponse;
 import com.develog.oauth.kakao.response.KakaoToken;
-import com.develog.oauth.memberClient.OauthMemberClient;
+import com.develog.domain.oauth.memberClient.OauthMemberClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
-import java.util.HashMap;
 
 @Component
 @RequiredArgsConstructor

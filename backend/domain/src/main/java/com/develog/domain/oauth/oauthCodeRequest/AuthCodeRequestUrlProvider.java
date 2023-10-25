@@ -1,6 +1,6 @@
-package com.develog.oauth.oauthCodeRequest;
+package com.develog.domain.oauth.oauthCodeRequest;
 
-import com.develog.oauth.OauthType;
+import com.develog.domain.oauth.OauthType;
 
 public interface AuthCodeRequestUrlProvider {
 

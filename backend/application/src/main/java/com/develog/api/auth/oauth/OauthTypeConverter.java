@@ -1,6 +1,6 @@
 package com.develog.api.auth.oauth;
 
-import com.develog.oauth.OauthType;
+import com.develog.domain.oauth.OauthType;
 import lombok.NoArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 

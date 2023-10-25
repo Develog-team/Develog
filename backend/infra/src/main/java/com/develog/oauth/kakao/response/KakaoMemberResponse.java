@@ -1,7 +1,7 @@
 package com.develog.oauth.kakao.response;
 
-import com.develog.oauth.OauthMember;
-import com.develog.oauth.OauthType;
+import com.develog.domain.oauth.OauthMember;
+import com.develog.domain.oauth.OauthType;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;

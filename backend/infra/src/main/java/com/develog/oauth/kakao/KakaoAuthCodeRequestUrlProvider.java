@@ -1,9 +1,9 @@
 package com.develog.oauth.kakao;
 
-import com.develog.oauth.OauthType;
+import com.develog.domain.oauth.OauthType;
 import com.develog.oauth.kakao.config.KakaoAuthConfig;
 import com.develog.oauth.kakao.config.KakaoProviderConfig;
-import com.develog.oauth.oauthCodeRequest.AuthCodeRequestUrlProvider;
+import com.develog.domain.oauth.oauthCodeRequest.AuthCodeRequestUrlProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
