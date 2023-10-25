@@ -1,4 +1,4 @@
-import { Button, Divider, Modal, Space, Tabs, Tag, message } from 'antd';
+import { Button, Divider, Modal, Space, Tag, message } from 'antd';
 import { useState } from 'react';
 import {
   DragDropContext,
@@ -11,10 +11,7 @@ import {
 import { StyledInput, StyledTextarea } from 'components';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { DefaultGoalPageBox } from 'components/goal';
 // ----------------------------------------------------------------------------------
-//탭 타입
-type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
 //칸반에 들어가는 목표 리스트 타입
 type KanbanListDataProps = {
@@ -293,110 +290,10 @@ const KanbanBoardWrapper = () => {
 };
 
 // ----------------------------------------------------------------------------------
-//목표 창
-const MyGoal = () => {
+
+export const MyGoalContainer = () => {
   const params = useParams();
-  //임시 데이터
-  const CalendarData = [
-    {
-      date: '2023-01-01',
-      goals: ['1번'],
-    },
-    {
-      date: '2023-08-22',
-      goals: ['1번', '2번'],
-    },
-    {
-      date: '2023-08-23',
-      goals: ['2번', '4번', '3번'],
-    },
-    {
-      date: '2023-10-22',
-      goals: ['1번', '2번'],
-    },
-    {
-      date: '2023-12-31',
-      goals: ['1번', '2번'],
-    },
-  ];
-  return (
-    <>
-      {!params.goalId ? (
-        <DefaultGoalPageBox data={CalendarData}>
-          <KanbanBoardWrapper />
-        </DefaultGoalPageBox>
-      ) : (
-        <Outlet />
-      )}
-    </>
-  );
-};
-
-//탭 관리
-const GoalTab = () => {
-  //기본 탭
-  const defaultPanes = [
-    {
-      label: '목표 기록',
-      key: '1',
-      children: <MyGoal />,
-      closable: false,
-    },
-    {
-      label: '옵저버 창',
-      key: '2',
-      children: '옵저버 창',
-      closable: false,
-    },
-  ];
-
-  //현재 활성화된 탭 키 상태
-  const [activeKey, setActiveKey] = useState(defaultPanes[0].key);
-  //현재 저장되어있는 탭 리스트 상태
-  const [items, setItems] = useState(defaultPanes);
-
-  // 배너 클릭 시 탭 변경
-  const changeTab = (key: string) => {
-    setActiveKey(key);
-  };
-
-  //탭 삭제
-  const removeTab = (targetKey: TargetKey) => {
-    //삭제 탭 키 찾기
-    const targetIndex = items.findIndex((pane) => pane.key === targetKey);
-
-    //찾은 탭 키를 소유한 탭을 필터링
-    const newPanes = items.filter((pane) => pane.key !== targetKey);
-
-    //현재 활성화 된 탭 창과 삭제 창이 같을 경우 탭 창 변경
-    if (newPanes.length && targetKey === activeKey) {
-      const { key } =
-        newPanes[
-          targetIndex === newPanes.length ? targetIndex - 1 : targetIndex
-        ];
-      setActiveKey(key);
-    }
-
-    //변경된 리스트 적용
-    setItems(newPanes);
-  };
-
-  return (
-    <Tabs
-      defaultActiveKey='1' //기본 탭
-      centered // 중앙 정렬
-      type='editable-card' // 수정이 가능한 카드 타입
-      hideAdd // 추가 버튼 숨기기
-      onChange={changeTab}
-      activeKey={activeKey}
-      onEdit={removeTab}
-      items={items}
-    />
-  );
-};
-
-export const GoalContainer = () => {
-  return <GoalTab />;
+  return <>{!params.goalId ? <KanbanBoardWrapper /> : <Outlet />}</>;
 };
 
 const StyledKanbanList = styled.div<{ $snapshot: DraggableStateSnapshot }>`

@@ -8,7 +8,7 @@ import { Breadcrumb, theme } from 'antd';
 
 type DefaultGoalPageProps = {
   children: React.ReactNode;
-  data: {
+  CalenderData?: {
     date: string;
     goals: string[];
   }[];
@@ -16,7 +16,7 @@ type DefaultGoalPageProps = {
 
 export const DefaultGoalPageBox = ({
   children,
-  data,
+  CalenderData,
 }: DefaultGoalPageProps) => {
   const params = useParams();
   const navigate = useNavigate();
@@ -39,7 +39,6 @@ export const DefaultGoalPageBox = ({
     };
     breadCrumbArr.push(newItems);
   }
-
   const { token } = theme.useToken();
 
   const Comp = useRef<HTMLDivElement>(null);
@@ -58,7 +57,8 @@ export const DefaultGoalPageBox = ({
       <ProfileBox />
       <ContentWrap ref={Comp} $scrollcolor={token.colorPrimary}>
         {/* 캘린더 차트 */}
-        <CalendarChartBox data={data} />
+        {CalenderData && <CalendarChartBox data={CalenderData} />}
+
         <ContainerBox $outline='shadow'>
           <div>
             {/* 게시글 id가 있을 경우만 이전 버튼 생성 */}

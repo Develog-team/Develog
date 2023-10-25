@@ -1,5 +1,4 @@
 import { Button, Divider, Dropdown, MenuProps, Space, Tag } from 'antd';
-import { DefaultGoalPageBox } from 'components/goal';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -136,39 +135,16 @@ const RecordContainer = () => {
 export const GoalsubContainer = () => {
   const location = useLocation();
   const params = useParams();
-  //임시 데이터
-  const CalendarData = [
-    {
-      date: '2023-01-01',
-      goals: ['1번'],
-    },
-    {
-      date: '2023-08-22',
-      goals: ['1번', '2번'],
-    },
-    {
-      date: '2023-08-23',
-      goals: ['2번', '4번', '3번'],
-    },
-    {
-      date: '2023-10-22',
-      goals: ['1번', '2번'],
-    },
-    {
-      date: '2023-12-31',
-      goals: ['1번', '2번'],
-    },
-  ];
   const containerSet = () => {
     if (params.executionId || location.pathname.includes('write')) {
       return <Outlet />;
     } else {
       return (
-        <DefaultGoalPageBox data={CalendarData}>
+        <>
           <MainContainer />
           <Divider dashed />
           <RecordContainer />
-        </DefaultGoalPageBox>
+        </>
       );
     }
   };

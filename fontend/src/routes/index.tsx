@@ -10,6 +10,7 @@ import {
   GoalMainPage,
   GoalPage,
   GoalsubPage,
+  ObservePage,
   WriteGoalPage,
 } from 'pages/goal';
 import { ProfilePage } from 'pages/profile';
@@ -79,6 +80,10 @@ export const CommonRoutes = () => {
                           ],
                         },
                       ],
+                    },
+                    {
+                      path: paths.ROUTE_OBSERVE,
+                      element: <ObservePage />,
                     },
                   ],
                 },

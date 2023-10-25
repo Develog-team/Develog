@@ -1,7 +1,7 @@
-import { GoalContainer } from 'containers/goal';
+import { MyGoalContainer } from 'containers/goal';
 
 const Goal = () => {
-  return <GoalContainer />;
+  return <MyGoalContainer />;
 };
 
 export default Goal;

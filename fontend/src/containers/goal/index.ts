@@ -5,3 +5,5 @@ export * from './GoalsubContainer';
 export * from './WriteGoalContainer';
 
 export * from './ExecutionGoalContainer';
+
+export * from './ObserveContainer';

@@ -2,7 +2,7 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true,
+    "node": true
   },
   "extends": [
     // 추가적인 규칙들 적용
@@ -10,7 +10,7 @@
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/recommended", //eslint typescript 규칙.
+    "plugin:@typescript-eslint/recommended" //eslint typescript 규칙.
   ],
   "plugins": ["prettier", "prefer-arrow"], //prettier 플러그인 추가
   "parserOptions": {

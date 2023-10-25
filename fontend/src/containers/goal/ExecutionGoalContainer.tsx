@@ -1,11 +1,14 @@
 import { Button, Drawer, Space } from 'antd';
-import { DefaultGoalPageBox } from 'components/goal';
 import { useState } from 'react';
+import { ViewerBox } from 'components';
 
 const data = {
   title: '기록 제목',
   date: '2023-02-01',
-  description: '기록 내용',
+  description:
+    '테스트\n ```java \n public class GoalController { \n\tprivate final GoalService goalService; \n\t@PostMapping() \n\tpublic Long created(GoalDTO goalDTO){ \n\t\treturn goalService.create(goalDTO);\n\t}\n\n\t@GetMapping()\n\tpublic List<GoalDTO> findList(){\n\t\treturn goalService.findByUser();\n\t}\n}\n```\n테스트',
+  retrospect:
+    '테스트\n ```java \n public class GoalController { \n\tprivate final GoalService goalService; \n\t@PostMapping() \n\tpublic Long created(GoalDTO goalDTO){ \n\t\treturn goalService.create(goalDTO);\n\t}\n\n\t@GetMapping()\n\tpublic List<GoalDTO> findList(){\n\t\treturn goalService.findByUser();\n\t}\n}\n```\n테스트',
 };
 
 const Main = () => {
@@ -42,8 +45,7 @@ const Main = () => {
       </div>
       <div>{data.date}</div>
       <h2>{data.title}</h2>
-
-      <div>{data.description}</div>
+      <ViewerBox value={data.description} />
       <Drawer
         width={720}
         title='회고'
@@ -57,38 +59,11 @@ const Main = () => {
           </Space>
         }
       >
-        <p>내용</p>
+        <ViewerBox value={data.retrospect} />
       </Drawer>
     </div>
   );
 };
 export const ExecutionGoalContainer = () => {
-  //임시 데이터
-  const CalendarData = [
-    {
-      date: '2023-01-01',
-      goals: ['1번'],
-    },
-    {
-      date: '2023-08-22',
-      goals: ['1번', '2번'],
-    },
-    {
-      date: '2023-08-23',
-      goals: ['2번', '4번', '3번'],
-    },
-    {
-      date: '2023-10-22',
-      goals: ['1번', '2번'],
-    },
-    {
-      date: '2023-12-31',
-      goals: ['1번', '2번'],
-    },
-  ];
-  return (
-    <DefaultGoalPageBox data={CalendarData}>
-      <Main />
-    </DefaultGoalPageBox>
-  );
+  return <Main />;
 };
