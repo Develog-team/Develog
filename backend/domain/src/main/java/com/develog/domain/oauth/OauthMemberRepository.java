@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 public interface OauthMemberRepository extends JpaRepository<OauthMember, Long> {
     String findRefreshTokenById(Long memberId);
+    Optional<OauthMember> findByOauthIdAndOauthType(Long oauthId, OauthType type);
 }

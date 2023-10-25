@@ -26,7 +26,7 @@ public class KakaoMemberClient implements OauthMemberClient {
     @Override
     public OauthMember findMember(String code) {
         KakaoToken token = kakaoApiClient.fetchToken(makeRequestTokenParam(code));
-        KakaoMemberResponse memberResponse = kakaoApiClient.fetchMember(token.getAccessToken());
+        KakaoMemberResponse memberResponse = kakaoApiClient.fetchMember("Bearer " + token.getAccessToken());
         return memberResponse.toEntity();
     }
 

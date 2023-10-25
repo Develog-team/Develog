@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Builder
+@Table(name = "oauth_member")
 public class OauthMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,7 @@ public class OauthMember {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private String email;
 
     @Column

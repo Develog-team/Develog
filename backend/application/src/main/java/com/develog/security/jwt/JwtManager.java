@@ -1,5 +1,6 @@
 package com.develog.security.jwt;
 
+import com.develog.domain.oauth.OauthMemberRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
