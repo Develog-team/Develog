@@ -12,11 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
-@Tag(name = "ProfileUpdateRequest")
+@Tag(name = "ProfileUpdateRequest", description = "Profile 수정 요청")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfileUpdateRequest {
+
     @Schema(description = "닉네임")
     private String nickname;
 

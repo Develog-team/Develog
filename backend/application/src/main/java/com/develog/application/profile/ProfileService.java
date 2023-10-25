@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -32,37 +33,31 @@ public class ProfileService {
                 req.getLink(), images));
 
         uploadImages(profile.getImages(), req.getImages());
-        return new ProfileCreateResponse(profile.getProfile_id(), profile.getNickname(),
-                profile.getIntroduction(), profile.getLink(),
-                profile.getImages().stream().map(ImageDto::toDto).collect(toList()));
+
+        return new ProfileCreateResponse(profile);
     }
 
     @Transactional(readOnly = true)
     public List<ProfileDto> findAllProfiles() {
         List<Profile> profiles = profileRepository.findAll();
         List<ProfileDto> profileDtos = new ArrayList<>();
-        profiles.stream().forEach(i -> profileDtos.add(new ProfileDto().toDto(i)));
+        profiles.stream().forEach(i -> profileDtos.add(new ProfileDto().toEntity(i)));
         return profileDtos;
     }
 
     @Transactional(readOnly = true)
     public ProfileDto findProfile(long profile_id) {
-        return ProfileDto.toDto(profileRepository.findById(profile_id).orElseThrow(ProfileNotFoundException::new));
+        return ProfileDto.toEntity(profileRepository.findById(profile_id).orElseThrow(ProfileNotFoundException::new));
     }
 
     @Transactional
     public ProfileDto editProfile(long profile_id, ProfileUpdateRequest req) {
         Profile profile = profileRepository.findById(profile_id).orElseThrow(ProfileNotFoundException::new);
 
-        profile.setNickname(req.getNickname());
-        profile.setIntroduction(req.getIntroduction());
-        profile.setLink(req.getLink());
-
-
         Profile.ImageUpdatedResult result = profile.update(req);
         uploadImages(result.getAddedImages(), result.getAddedImageFiles());
         deleteImages(result.getDeletedImages());
-        return ProfileDto.toDto(profile);
+        return ProfileDto.toEntity(profile);
     }
 
     @Transactional

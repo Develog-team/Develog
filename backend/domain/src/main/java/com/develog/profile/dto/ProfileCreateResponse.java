@@ -2,16 +2,17 @@ package com.develog.profile.dto;
 
 import com.develog.profile.entity.Profile;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.ElementCollection;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.Lob;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
-@AllArgsConstructor
+@Tag(name = "ProfileCreateResponse", description = "Profile 조회 요청")
+@Getter
+@NoArgsConstructor
 public class ProfileCreateResponse {
 
     @Schema(description = "프로필 pk 번호")
@@ -30,14 +31,12 @@ public class ProfileCreateResponse {
     @Schema(description = "이미지")
     private List<ImageDto> images;
 
-    public static ProfileCreateResponse toDto(Profile profile) {
-        return new ProfileCreateResponse(
-                profile.getProfile_id(),
-                profile.getNickname(),
-                profile.getIntroduction(),
-                profile.getLink(),
-                profile.getImages().stream().map(ImageDto::toDto).collect(Collectors.toList())
-        );
-    }
 
+    public ProfileCreateResponse(Profile entity) {
+        this.profile_id = entity.getProfile_id();
+        this.nickname = entity.getNickname();
+        this.introduction = entity.getIntroduction();
+        this.link = entity.getLink();
+        this.images = entity.getImages().stream().map(ImageDto::toEntity).collect(Collectors.toList());
+    }
 }

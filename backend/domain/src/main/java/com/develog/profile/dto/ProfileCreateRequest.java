@@ -1,21 +1,21 @@
 package com.develog.profile.dto;
 
+import com.develog.profile.entity.Profile;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Lob;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Tag(name = "ProfileCreateRequest", description = "Profile 생성 요청")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProfileCreateRequest {
 
     @Schema(description = "닉네임")
@@ -30,4 +30,6 @@ public class ProfileCreateRequest {
 
     @Schema(description = "이미지")
     private List<MultipartFile> images = new ArrayList<>();
+
+
 }

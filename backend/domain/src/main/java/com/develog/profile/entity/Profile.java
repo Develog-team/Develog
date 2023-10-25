@@ -4,10 +4,7 @@ package com.develog.profile.entity;
 import com.develog.profile.dto.ProfileUpdateRequest;
 import com.develog.time.entity.JpaBaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -17,9 +14,8 @@ import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Profile extends JpaBaseEntity {
 
@@ -46,7 +42,7 @@ public class Profile extends JpaBaseEntity {
 //    @OnDelete(action = OnDeleteAction.CASCADE)
 //    private OauthMember member;
 
-
+    @Builder
     public Profile(String nickname, String introduction, List<String> link, List<Image> images) {
         this.nickname = nickname;
         this.introduction = introduction;
@@ -55,10 +51,11 @@ public class Profile extends JpaBaseEntity {
         addImages(images);
     }
 
+
     public ImageUpdatedResult update(ProfileUpdateRequest req) {
-        this.nickname = nickname;
-        this.introduction = introduction;
-        this.link = link;
+        this.nickname = req.getNickname();
+        this.introduction = req.getIntroduction();
+        this.link = req.getLink();
 
         ImageUpdatedResult result = findImageUpdatedResult(req.getAddedImages(), req.getDeletedImages());
         addImages(result.getAddedImages());
