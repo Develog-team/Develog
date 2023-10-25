@@ -6,6 +6,7 @@ import com.develog.profile.dto.ProfileUpdateRequest;
 import com.develog.response.Response;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,21 +39,22 @@ public class ProfileController {
     @Operation(summary = "프로필 단건 조회", description = "프로필을 단건 조회합니다.")
     @GetMapping("/detail/{profile_id}")
     @ResponseStatus(HttpStatus.OK)
-    public Response findProfile(@ApiParam(value = " profile_id", required = true) @PathVariable long profile_id) {
+    public Response findProfile(@Parameter(name = " profile_id", description = "profile의 id(pk)") @PathVariable long profile_id) {
         return Response.success(profileService.findProfile(profile_id));
     }
 
     @Operation(summary = "프로필 수정", description = "프로필을 수정합니다.")
     @PutMapping("/update/{profile_id}")
     @ResponseStatus(HttpStatus.OK)
-    public Response editProfile(@PathVariable long profile_id, @ModelAttribute ProfileUpdateRequest req) {
+    public Response editProfile(@Parameter(name = " profile_id", description = "profile의 id(pk)") @PathVariable long profile_id,
+                                @ModelAttribute ProfileUpdateRequest req) {
         return Response.success(profileService.editProfile(profile_id, req));
     }
 
     @Operation(summary = "프로필 삭제", description = "프로필을 삭제합니다.")
     @DeleteMapping("/delete/{profile_id}")
     @ResponseStatus(HttpStatus.OK)
-    public Response deleteProfile(@PathVariable long profile_id) {
+    public Response deleteProfile(@Parameter(name = " profile_id", description = "profile의 id(pk)") @PathVariable long profile_id) {
         profileService.deleteProfile(profile_id);
         return Response.success();
     }
