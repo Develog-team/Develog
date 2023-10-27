@@ -15,6 +15,7 @@ export const ROUTE_GOAL_MY = 'my';
 export const ROUTE_GOAL_LIST = `:goalId`;
 export const ROUTE_EXECUTION_GOAL_LIST = `:executionId`;
 export const ROUTE_GOAL_WRITE = `write`;
+export const ROUTE_GOAL_REWRITE = `rewrite`;
 
 /* 옵저빙 매인 */
 export const ROUTE_OBSERVE = `observe`;

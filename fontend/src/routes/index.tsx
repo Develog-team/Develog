@@ -67,15 +67,32 @@ export const CommonRoutes = () => {
                           path: paths.ROUTE_GOAL_LIST,
                           element: <GoalsubPage />,
                           children: [
-                            // 목표 실행 작성 페이지
+                            //목표 실행 작성 페이지
                             {
                               path: paths.ROUTE_GOAL_WRITE,
+                              element: <WriteGoalPage />,
+                            },
+                            //목표 실행 수정 페이지
+                            {
+                              path: paths.ROUTE_GOAL_REWRITE,
                               element: <WriteGoalPage />,
                             },
                             //목표 실행 페이지
                             {
                               path: paths.ROUTE_EXECUTION_GOAL_LIST,
                               element: <ExecutionGoalPage />,
+                              children: [
+                                //회고 작성 페이지
+                                {
+                                  path: paths.ROUTE_GOAL_WRITE,
+                                  element: <WriteGoalPage />,
+                                },
+                                //회고 수정 페이지
+                                {
+                                  path: paths.ROUTE_GOAL_REWRITE,
+                                  element: <WriteGoalPage />,
+                                },
+                              ],
                             },
                           ],
                         },

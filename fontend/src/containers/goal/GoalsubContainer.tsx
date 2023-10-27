@@ -1,7 +1,9 @@
 import { Button, Divider, Dropdown, MenuProps, Space, Tag } from 'antd';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { useState } from 'react';
+import { GoalModal } from 'components/goal';
+import { ROUTE_GOAL_WRITE, ROUTE_GOAL_REWRITE } from 'routes/const';
 //타입
 type RecordDataProps = {
   recordId: number;
@@ -55,6 +57,13 @@ const MainContainer = () => {
       label: <Tag>{'완료'}</Tag>,
     },
   ];
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  //모달 오픈
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       <h1>{data.title}</h1>
@@ -64,8 +73,14 @@ const MainContainer = () => {
           <Tag style={{ cursor: 'pointer' }}>{data.status}</Tag>
         </Dropdown>
         <Space>
-          <Button>수정</Button>
+          <Button onClick={showModal}>수정</Button>
           <Button danger>삭제</Button>
+          <GoalModal
+            title={data.title}
+            description={data.description}
+            isOpen={isModalOpen}
+            setIsOpen={setIsModalOpen}
+          />
         </Space>
       </SettingWrap>
     </>
@@ -133,10 +148,15 @@ const RecordContainer = () => {
 };
 // ------------------------------------------------------------------------------
 export const GoalsubContainer = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
   const params = useParams();
+
   const containerSet = () => {
-    if (params.executionId || location.pathname.includes('write')) {
+    if (
+      params.executionId ||
+      pathname.includes(ROUTE_GOAL_WRITE) ||
+      pathname.includes(ROUTE_GOAL_REWRITE)
+    ) {
       return <Outlet />;
     } else {
       return (

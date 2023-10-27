@@ -8,6 +8,7 @@ import {
   ROUTE_GOAL_MY,
   ROUTE_GOAL_WRITE,
   ROUTE_OBSERVE,
+  ROUTE_GOAL_REWRITE,
 } from 'routes/const';
 import styled from 'styled-components';
 
@@ -41,7 +42,7 @@ const CalendarData = [
 const GoalMainContainer = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const pathnameArr = pathname.split('/').filter((list) => list !== '');
+  const pathnameArr = pathname.split('/').slice(1);
 
   useEffect(() => {
     // goals로만 입장 시 /goals/my로 이동
@@ -96,31 +97,40 @@ const GoalMainContainer = () => {
 
   return (
     <Wrap>
-      <Tabs
-        defaultActiveKey={pathnameArr[1]} //기본 탭
-        centered // 중앙 정렬
-        type='editable-card' // 수정이 가능한 카드 타입
-        hideAdd // 추가 버튼 숨기기
-        onChange={changeTab}
-        activeKey={activeKey}
-        onEdit={removeTab}
-        items={items}
-      />
+      {/* 탭 없어야하는 곳 빼기 */}
+      {!pathnameArr.includes(ROUTE_GOAL_WRITE) &&
+        !pathnameArr.includes(ROUTE_GOAL_REWRITE) && (
+          <Tabs
+            defaultActiveKey={pathnameArr[1]} //기본 탭
+            centered // 중앙 정렬
+            type='editable-card' // 수정이 가능한 카드 타입
+            hideAdd // 추가 버튼 숨기기
+            onChange={changeTab}
+            activeKey={activeKey}
+            onEdit={removeTab}
+            items={items}
+          />
+        )}
+
       {/* 옵저빙 */}
       {pathname.includes(ROUTE_OBSERVE) && (
         <DefaultGoalPageBox>
           <Outlet />
         </DefaultGoalPageBox>
       )}
+
       {/* 목표 */}
       {!pathnameArr.includes(ROUTE_GOAL_WRITE) &&
+        !pathnameArr.includes(ROUTE_GOAL_REWRITE) &&
         !pathnameArr.includes(ROUTE_OBSERVE) && (
           <DefaultGoalPageBox CalenderData={CalendarData}>
             <Outlet />
           </DefaultGoalPageBox>
         )}
-      {/* 작성 */}
+
+      {/* 작성 및 수정 */}
       {pathnameArr.includes(ROUTE_GOAL_WRITE) && <Outlet />}
+      {pathnameArr.includes(ROUTE_GOAL_REWRITE) && <Outlet />}
     </Wrap>
   );
 };

@@ -1,4 +1,4 @@
-import { Button, Divider, Modal, Space, Tag, message } from 'antd';
+import { Button, Space, Tag } from 'antd';
 import { useState } from 'react';
 import {
   DragDropContext,
@@ -8,9 +8,9 @@ import {
   Droppable,
   DroppableProvided,
 } from 'react-beautiful-dnd';
-import { StyledInput, StyledTextarea } from 'components';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { GoalModal } from 'components/goal';
 // ----------------------------------------------------------------------------------
 
 //칸반에 들어가는 목표 리스트 타입
@@ -104,93 +104,6 @@ const KanbanList = ({
   );
 };
 
-const CreateGoalModal = ({
-  isOpen,
-  setIsOpen,
-}: {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
-  const [createGoalTitle, setCreateGoalTitle] = useState<string>('');
-  const [createGoalDesc, setCreateGoalDesc] = useState<string>('');
-  const [messageApi, contextHolder] = message.useMessage();
-  //임시 구현용
-  const isSuccessGoal = true;
-
-  //목표 생성
-  const createGoal = () => {
-    //클릭 시 로딩
-    setConfirmLoading(true);
-    // api 호출
-
-    //결과
-    if (!isSuccessGoal) {
-      //실패 => 임시로 구현
-      setTimeout(() => {
-        //메세지
-        messageApi.open({
-          type: 'error',
-          content: '생성에 실패하였습니다. 다시 시도하여 주세요',
-        });
-        //로딩 끝
-        setConfirmLoading(false);
-      }, 2000);
-    } else {
-      // 성공 => 임시로 로딩 구현
-      setTimeout(() => {
-        //메세지
-        messageApi.open({
-          type: 'success',
-          content: '생성에 성공하였습니다',
-        });
-        //로딩 끝, 모달 종료
-        setConfirmLoading(false);
-        closeModal();
-      }, 2000);
-    }
-  };
-
-  //모달 접기
-  const closeModal = () => {
-    //작성한 내용 초기화
-    setCreateGoalTitle('');
-    setCreateGoalDesc('');
-    //모달 접기
-    setIsOpen(false);
-  };
-
-  return (
-    <>
-      {contextHolder}
-      <Modal
-        title='목표 생성'
-        open={isOpen}
-        onOk={createGoal}
-        onCancel={closeModal}
-        confirmLoading={confirmLoading}
-      >
-        <StyledInput
-          id='title'
-          placeholder='제목'
-          value={createGoalTitle}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setCreateGoalTitle(e.target.value)
-          }
-        />
-        <Divider />
-        <StyledTextarea
-          id='discription'
-          value={createGoalDesc}
-          onChange={(e) => setCreateGoalDesc(e.target.value)}
-          placeholder='내용 작성'
-          autoSize={{ minRows: 3, maxRows: 5 }}
-        />
-      </Modal>
-    </>
-  );
-};
-
 //칸반 전체
 const KanbanBoardWrapper = () => {
   //임시 데이터
@@ -254,7 +167,7 @@ const KanbanBoardWrapper = () => {
       <Space>
         <h2>목표 칸반보드</h2>
         <Button onClick={showModal}>목표 작성</Button>
-        <CreateGoalModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+        <GoalModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       </Space>
       <DragDropContext onDragEnd={onDragEnd}>
         <div
