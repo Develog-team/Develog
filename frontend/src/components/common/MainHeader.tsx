@@ -7,7 +7,8 @@ import { ROUTE_FEED, ROUTE_GOAL, ROUTE_INFO, ROUTE_SIGN_IN, ROUTE_SIGN_UP } from
 import styled from "styled-components";
 
 export const MainHeader = () => {
-  const navigate = useNavigate();
+
+    const navigate = useNavigate();
 
     const [token, setToken] = useState<string | null>();
     const [profile, setProfile] = useState<string | null>();
@@ -18,8 +19,6 @@ export const MainHeader = () => {
         setProfile(sessionStorage?.getItem("picture"));
         setName(sessionStorage?.getItem("name"));
     }, [])
-
-    const navigate = useNavigate();
 
     const handleLogout = () => {
         setToken(null);

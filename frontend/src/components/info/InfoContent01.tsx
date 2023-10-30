@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ROUTE_SIGN_UP } from "routes/const";
+import { ROUTE_SIGN_IN } from "routes/const";
 import styled from "styled-components"
 
 export const InfoContent01 = () => {
@@ -14,7 +14,7 @@ export const InfoContent01 = () => {
             </StyledCont>
             <StyledCont2>
                 <StartButton
-                    onClick={() => navigate(ROUTE_SIGN_UP)}
+                    onClick={() => navigate(ROUTE_SIGN_IN)}
                     aria-hidden="true"
                 >
                     <span>디벨로그 시작하기</span>
