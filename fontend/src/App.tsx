@@ -20,7 +20,7 @@ const App = () => {
           borderRadius: 1,
           fontSize: 15,
           fontFamily: 'NanumSquareNeo',
-        },
+        }
       }}
       locale={koKR}
     >
