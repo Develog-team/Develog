@@ -5,7 +5,14 @@ import { NotFound } from 'containers';
 import { InfoPage } from 'pages/info';
 import PrivateRoute from './PrivateRoute';
 import { SignInPage, SignUpPage } from 'pages/sign';
-import { GoalPage } from 'pages/goal';
+import {
+  ExecutionGoalPage,
+  GoalMainPage,
+  GoalPage,
+  GoalsubPage,
+  ObservePage,
+  WriteGoalPage,
+} from 'pages/goal';
 import { ProfilePage } from 'pages/profile';
 import { FeedPage } from 'pages/feed';
 
@@ -49,8 +56,55 @@ export const CommonRoutes = () => {
                 // 목표
                 {
                   path: paths.ROUTE_GOAL,
-                  element: <GoalPage />,
+                  element: <GoalMainPage />,
+                  children: [
+                    {
+                      path: paths.ROUTE_GOAL_MY,
+                      element: <GoalPage />,
+                      children: [
+                        // 특정 목표 페이지
+                        {
+                          path: paths.ROUTE_GOAL_LIST,
+                          element: <GoalsubPage />,
+                          children: [
+                            //목표 실행 작성 페이지
+                            {
+                              path: paths.ROUTE_GOAL_WRITE,
+                              element: <WriteGoalPage />,
+                            },
+                            //목표 실행 수정 페이지
+                            {
+                              path: paths.ROUTE_GOAL_REWRITE,
+                              element: <WriteGoalPage />,
+                            },
+                            //목표 실행 페이지
+                            {
+                              path: paths.ROUTE_EXECUTION_GOAL_LIST,
+                              element: <ExecutionGoalPage />,
+                              children: [
+                                //회고 작성 페이지
+                                {
+                                  path: paths.ROUTE_GOAL_WRITE,
+                                  element: <WriteGoalPage />,
+                                },
+                                //회고 수정 페이지
+                                {
+                                  path: paths.ROUTE_GOAL_REWRITE,
+                                  element: <WriteGoalPage />,
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      path: paths.ROUTE_OBSERVE,
+                      element: <ObservePage />,
+                    },
+                  ],
                 },
+
                 //프로필 페이지
                 {
                   path: paths.ROUTE_PROFILE,
@@ -61,8 +115,8 @@ export const CommonRoutes = () => {
             //피드 메인 페이지
             {
               path: paths.ROUTE_FEED,
-              element: <FeedPage />
-            }
+              element: <FeedPage />,
+            },
           ],
         },
       ],

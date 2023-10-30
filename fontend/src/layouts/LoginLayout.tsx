@@ -1,21 +1,20 @@
 import { Avatar, Layout } from "antd"
 import { Content } from "antd/es/layout/layout"
 import { Outlet } from "react-router-dom"
-import 'assets/css/sign/signLayout.css';
+import styled from "styled-components"
 
 export const LoginLayout = () => {
     return (
         <Layout className="full-view">
-            <div
-                className="logo">
+            <SignHeader>
                 <Avatar size="small" />
                 <span style={{ marginLeft: 10 }}>
                     디벨로그
                 </span>
-            </div>
-            <Layout className="main">
+            </SignHeader>
+            <Layout className="sign-main">
                 <div />
-                <Content className="content">
+                <Content className="sign-cont">
                     <Outlet />
                 </Content>
                 <div />
@@ -23,3 +22,9 @@ export const LoginLayout = () => {
         </Layout>
     )
 }
+
+const SignHeader = styled.div`
+    display: flex;
+    justify-content: left;
+    margin: 2rem 0px 0px 5rem;
+`
