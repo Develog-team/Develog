@@ -1,3 +1,4 @@
+import { LinkOutlined } from "@ant-design/icons";
 import { Button, Divider, Input, Modal, ModalProps } from "antd";
 
 interface FeedAddModalProps extends ModalProps {
@@ -37,9 +38,12 @@ export const FeedAddModal = (props: FeedAddModalProps) => {
             footer={footer}
         >
             <Divider />
+            <Input placeholder="공유할 링크를 추가해주세요." prefix={<LinkOutlined />} />
             <Input.TextArea
+                placeholder="최대 ~~자까지 작성 가능합니다."
                 style={{
                     minHeight: 200,
+                    marginTop: 5
                 }}
             />
         </Modal>

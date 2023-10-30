@@ -1,8 +1,12 @@
+import { message } from "antd";
 import { PrevContent } from "components"
 import { FeedContLayout } from "layouts"
 import { feedPrev } from "modules/feed";
+import { useState } from "react";
 
 export const AllFeedContainer = () => {
+
+    const [showMore, setShowMore] = useState<boolean>(false);
 
     const example: feedPrev[] = [
         {
@@ -137,24 +141,57 @@ export const AllFeedContainer = () => {
         }
     ];
 
+    // const checkMore =() =>{
+    //     const thisUser = sessionStorage.getItem("name");
+
+    //     if(thisUser === 'nickname'){
+    //         //추가 버튼 클릭시 본인 글일 때 삭제, 수정 버튼 보임
+    //     }else{
+    //     //추가 버튼 클릭시 본인 글이 아닐때 해당 글 작성자 옵저빙 버튼보임
+    //     }
+    // }
+
+    const handleShareFeed = () => {
+        let url = '';
+        const textarea = document.createElement("textarea");
+        document.body.appendChild(textarea);
+        url = window.document.location.href;
+        textarea.value = url;
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        message.success('url이 복사되었습니다');
+    }
+
     return (
-        <FeedContLayout>
-            <>
-                <div>
-                    {
-                        example.map((value: any) => {
-                            return (
-                                <PrevContent
-                                    key={value.key}
-                                    data={value}
-                                />
+        <>
+            <FeedContLayout>
+                <>
+                    <div>
+                        {
+                            example.map((value: any) => {
+                                return (
+                                    <PrevContent
+                                        key={value.key}
+                                        data={value}
+                                        openMore={() => setShowMore(true)}
+                                        shareFeed={() => handleShareFeed()}
+                                    />
+                                )
+                            }
                             )
                         }
-                        )
-                    }
-                </div>
-            </>
-        </FeedContLayout>
+                    </div>
+                </>
+            </FeedContLayout>
+            {
+                showMore && (
+                    <>
+
+                    </>
+                )
+            }
+        </>
     )
 }
 

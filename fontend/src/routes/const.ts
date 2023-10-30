@@ -17,3 +17,7 @@ export const ROUTE_PROFILE = `/profile`;
 
 /* 피드 메인 */
 export const ROUTE_FEED = `/feed`;
+
+/* 피드 상세 */
+export const ROUTE_FEED_DETAIL =`${ROUTE_FEED}/:id`;
+export const ROUTE_FEED_DETAIL_WITH_ID =(id:string) => `${ROUTE_FEED}/${id}`;
